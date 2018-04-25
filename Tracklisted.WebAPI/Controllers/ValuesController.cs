@@ -24,6 +24,14 @@ namespace Tracklisted.WebAPI.Controllers
             return "value";
         }
 
+        // GET api/values/5
+        [HttpGet]
+        [Route("throw")]
+        public string GetException()
+        {
+            throw new InvalidOperationException("Dunno");
+        }
+
         // POST api/values
         [HttpPost]
         public void Post([FromBody] string value)

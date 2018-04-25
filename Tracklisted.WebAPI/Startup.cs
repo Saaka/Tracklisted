@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Tracklisted.WebAPI.Config;
 
 namespace Tracklisted.WebAPI
 {
@@ -41,7 +42,8 @@ namespace Tracklisted.WebAPI
                 app.UseHttpsRedirection();
             }
 
-            app.UseMvc();
+            app.UseMiddleware<ExceptionHandlingMiddleware>()
+                .UseMvc();
         }
     }
 }
