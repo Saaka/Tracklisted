@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Tracklisted.Commands.Receiver": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}
