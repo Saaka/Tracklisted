@@ -7,11 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tracklisted.WebAPI", "Track
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tracklisted", "Tracklisted\Tracklisted.csproj", "{B38E6B14-2022-480C-90A7-E77A3BA063DF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tracklisted.Messages.Sender", "Tracklisted.Message.Sender\Tracklisted.Messages.Sender.csproj", "{A1EF8739-45DD-4AF4-9683-1B7EB3925377}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tracklisted.Messages.Sender", "Tracklisted.Messages.Sender\Tracklisted.Messages.Sender.csproj", "{A1EF8739-45DD-4AF4-9683-1B7EB3925377}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tracklisted.Configuration", "Tracklisted.Configuration\Tracklisted.Configuration.csproj", "{648DCC93-D36F-47ED-81A4-282CDC155A44}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tracklisted.Messages", "Tracklisted.Message\Tracklisted.Messages.csproj", "{F2346352-A16B-4B0C-91B6-AAEBBC11C663}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tracklisted.Messages", "Tracklisted.Messages\Tracklisted.Messages.csproj", "{F2346352-A16B-4B0C-91B6-AAEBBC11C663}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

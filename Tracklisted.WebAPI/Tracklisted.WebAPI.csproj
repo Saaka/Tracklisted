@@ -18,7 +18,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Tracklisted.Configuration\Tracklisted.Configuration.csproj" />
-    <ProjectReference Include="..\Tracklisted.Message.Sender\Tracklisted.Messages.Sender.csproj" />
+    <ProjectReference Include="..\Tracklisted.Messages.Sender\Tracklisted.Messages.Sender.csproj" />
   </ItemGroup>
 
 </Project>
