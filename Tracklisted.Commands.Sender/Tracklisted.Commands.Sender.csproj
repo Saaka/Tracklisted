@@ -10,7 +10,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Tracklisted.Configuration\Tracklisted.Configuration.csproj" />
-    <ProjectReference Include="..\Tracklisted.Messages\Tracklisted.Messages.csproj" />
+    <ProjectReference Include="..\Tracklisted.Commands\Tracklisted.Commands.csproj" />
   </ItemGroup>
 
   <ItemGroup>

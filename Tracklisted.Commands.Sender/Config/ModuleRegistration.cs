@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
-namespace Tracklisted.Messages.Sender.Config
+namespace Tracklisted.Commands.Sender.Config
 {
     public static class ModuleRegistration
     {
@@ -9,7 +9,7 @@ namespace Tracklisted.Messages.Sender.Config
         /// </summary>
         /// <param name="services"></param>
         /// <returns></returns>
-        public static IServiceCollection RegisterMessageSender(this IServiceCollection services)
+        public static IServiceCollection RegisterCommandsSender(this IServiceCollection services)
         {
             services.AddSingleton<IMessageSenderClient, SenderClient>();
 

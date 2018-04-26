@@ -3,7 +3,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Tracklisted.Configuration;
 
-namespace Tracklisted.Messages.Sender
+namespace Tracklisted.Commands.Sender
 {
     internal class SenderClient : IMessageSenderClient
     {
@@ -16,10 +16,10 @@ namespace Tracklisted.Messages.Sender
             _client = new QueueClient(_configuration.ServiceBusConnectionString, _configuration.ServiceBusQueue);
         }
 
-        public async Task SendMessage<T>(T messageBody)
-            where T : IMessage
+        public async Task Send<T>(T messageBody)
+            where T : ICommand
         {
-            var message = new Message(Encoding.UTF8.GetBytes(messageBody.MessageId));
+            var message = new Message(Encoding.UTF8.GetBytes(messageBody.CommandId));
             await _client.SendAsync(message);
         }
     }

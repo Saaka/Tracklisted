@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
-using Tracklisted.Messages;
-using Tracklisted.Messages.Sender;
+using Tracklisted.Commands;
+using Tracklisted.Commands.Sender;
 
 namespace Tracklisted.WebAPI.Controllers
 {
@@ -23,14 +23,15 @@ namespace Tracklisted.WebAPI.Controllers
             string messageId = Guid.NewGuid()
                 .ToString();
 
-            await _senderClient.SendMessage(new TestMessage { MessageId = messageId });
+            await _senderClient
+                .Send(new TestMessage { CommandId = messageId });
 
             return new JsonResult(messageId);
         }
     }
 
-    internal class TestMessage : IMessage
+    internal class TestMessage : ICommand
     {
-        public string MessageId { get; set; }
+        public string CommandId { get; set; }
     }
 }

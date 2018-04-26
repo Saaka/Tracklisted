@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Tracklisted.Configuration;
-using Tracklisted.Messages.Sender.Config;
+using Tracklisted.Commands.Sender.Config;
 
 namespace Tracklisted.WebAPI.Config
 {
@@ -11,7 +11,7 @@ namespace Tracklisted.WebAPI.Config
         {
             services
                 .RegisterConfiguration()
-                .RegisterMessageSender();
+                .RegisterCommandsSender();
 
             return services;
         }
