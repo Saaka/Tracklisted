@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Tracklisted.Configuration;
+using Tracklisted.Messages.Sender.Config;
 
 namespace Tracklisted.WebAPI.Config
 {
@@ -9,7 +10,8 @@ namespace Tracklisted.WebAPI.Config
         public static IServiceCollection RegisterModules(this IServiceCollection services, IConfiguration configuration)
         {
             services
-                .RegisterConfiguration();
+                .RegisterConfiguration()
+                .RegisterMessageSender();
 
             return services;
         }
