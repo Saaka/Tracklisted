@@ -27,6 +27,7 @@ namespace Tracklisted.WebAPI
         public void ConfigureServices(IServiceCollection services)
         {
             services
+                .RegisterModules(Configuration)
                 .AddMvc()
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
