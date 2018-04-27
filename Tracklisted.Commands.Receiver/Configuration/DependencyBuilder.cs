@@ -22,7 +22,7 @@ namespace Tracklisted.Commands.Receiver.Configuration
         public static IConfiguration BuildConfiguration()
         {
             var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
-
+            
             var builder = new ConfigurationBuilder()
                 .AddJsonFile($"appsettings.json", false)
                 .AddJsonFile($"appsettings.{environment}.json", true)
