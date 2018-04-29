@@ -13,7 +13,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tracklisted.Configuration",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tracklisted.Commands", "Tracklisted.Commands\Tracklisted.Commands.csproj", "{F2346352-A16B-4B0C-91B6-AAEBBC11C663}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tracklisted.Commands.Receiver", "Tracklisted.Commands.Receiver\Tracklisted.Commands.Receiver.csproj", "{E7F4F67A-D2A1-4F87-BF37-0F8FE58A10EE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tracklisted.Commands.Receiver", "Tracklisted.Commands.Receiver\Tracklisted.Commands.Receiver.csproj", "{E7F4F67A-D2A1-4F87-BF37-0F8FE58A10EE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tracklisted.Infrastructure", "Tracklisted.Infrastructure\Tracklisted.Infrastructure.csproj", "{D57ECCE1-E406-4E8A-A675-BA8172027C4C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{E7F4F67A-D2A1-4F87-BF37-0F8FE58A10EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E7F4F67A-D2A1-4F87-BF37-0F8FE58A10EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E7F4F67A-D2A1-4F87-BF37-0F8FE58A10EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D57ECCE1-E406-4E8A-A675-BA8172027C4C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D57ECCE1-E406-4E8A-A675-BA8172027C4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D57ECCE1-E406-4E8A-A675-BA8172027C4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D57ECCE1-E406-4E8A-A675-BA8172027C4C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -30,9 +30,9 @@ namespace Tracklisted.Commands.Receiver
                 var config = serviceProvider.GetRequiredService<IServiceBusConfiguration>();
                 queueClient = new QueueClient(config.ServiceBusConnectionString, config.ServiceBusQueue);
 
-                Console.WriteLine("======================================================");
-                Console.WriteLine("Press ENTER key to exit after receiving all the messages.");
-                Console.WriteLine("======================================================");
+                Console.WriteLine("===========================");
+                Console.WriteLine("Tracklisted client started.");
+                Console.WriteLine("============================");
 
                 // Register the queue message handler and receive messages in a loop
                 RegisterOnMessageHandlerAndReceiveMessages();
