@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using System;
+using Polly;
 
 namespace Tracklisted.Infrastructure.Configuration
 {
@@ -21,7 +21,8 @@ namespace Tracklisted.Infrastructure.Configuration
                 {
                     config.DefaultRequestHeaders.Accept
                         .Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue(AcceptJson));
-                });
+                })
+                .AddTransientHttpErrorPolicy(pb => pb.RetryAsync(2));
 
             return services;
         }
