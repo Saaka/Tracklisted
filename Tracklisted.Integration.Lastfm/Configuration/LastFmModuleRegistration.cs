@@ -11,6 +11,9 @@ namespace Tracklisted.Integration.Lastfm.Configuration
             services
                 .RegisterHttpClient<LastFmApiClient>();
 
+            services
+                .AddSingleton<ILastfmConfiguration, LastfmConfiguration>();
+
             return services;
         }
     }

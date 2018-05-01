@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Tracklisted.Configuration\Tracklisted.Configuration.csproj" />
     <ProjectReference Include="..\Tracklisted.Infrastructure\Tracklisted.Infrastructure.csproj" />
   </ItemGroup>
 
