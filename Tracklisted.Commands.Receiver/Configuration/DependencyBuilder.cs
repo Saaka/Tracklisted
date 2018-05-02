@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
+using Tracklisted.Commands.Receiver.CommandHandlers;
 using Tracklisted.Configuration;
 
 namespace Tracklisted.Commands.Receiver.Configuration
@@ -14,6 +15,8 @@ namespace Tracklisted.Commands.Receiver.Configuration
 
             var services = new ServiceCollection()
                 .AddSingleton(configuration)
+                .AddSingleton<IQueueClientFactory, QueueClientFactory>()
+                .AddTransient<CommandHandlerBase>()
                 .AddLogging(log =>
                 {
                     log.AddConsole();

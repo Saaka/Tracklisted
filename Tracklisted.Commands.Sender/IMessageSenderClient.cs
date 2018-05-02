@@ -4,6 +4,6 @@ namespace Tracklisted.Commands.Sender
 {
     public interface IMessageSenderClient
     {
-        Task Send<T>(T message) where T : ICommand;
+        Task Send<T>(T message) where T : BaseCommand;
     }
 }

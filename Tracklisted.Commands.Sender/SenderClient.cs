@@ -1,4 +1,5 @@
 ﻿using Microsoft.Azure.ServiceBus;
+using Newtonsoft.Json;
 using System.Text;
 using System.Threading.Tasks;
 using Tracklisted.Configuration;
@@ -17,9 +18,12 @@ namespace Tracklisted.Commands.Sender
         }
 
         public async Task Send<T>(T messageBody)
-            where T : ICommand
+            where T : BaseCommand
         {
-            var message = new Message(Encoding.UTF8.GetBytes(messageBody.CommandId));
+            var body = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(messageBody));
+            var message = new Message(body);
+            message.ContentType = "application/json;charset=utf-8";
+
             await _client.SendAsync(message);
         }
     }

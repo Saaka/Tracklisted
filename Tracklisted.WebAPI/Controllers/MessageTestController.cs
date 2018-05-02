@@ -29,14 +29,18 @@ namespace Tracklisted.WebAPI.Controllers
             _logger.LogInformation($"Created message with id {messageId}");
 
             await _senderClient
-                .Send(new TestMessage { CommandId = messageId });
-
+                .Send(new TestCommand { CommandId = messageId, Sample = "Sample" });
+            
             return new JsonResult(messageId);
         }
     }
 
-    internal class TestMessage : ICommand
+    internal class TestCommand : BaseCommand
     {
-        public string CommandId { get; set; }
+        public TestCommand()
+        {
+            CommandType = CommandType.GetArtist;
+        }
+        public string Sample { get; set; }
     }
 }

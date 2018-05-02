@@ -13,6 +13,7 @@
     <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="2.1.0-preview2-final" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Tracklisted.Commands\Tracklisted.Commands.csproj" />
     <ProjectReference Include="..\Tracklisted.Configuration\Tracklisted.Configuration.csproj" />
     <ProjectReference Include="..\Tracklisted.Integration.Lastfm\Tracklisted.Integration.Lastfm.csproj" />
   </ItemGroup>
