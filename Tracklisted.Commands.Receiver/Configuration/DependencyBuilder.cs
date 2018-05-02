@@ -16,7 +16,7 @@ namespace Tracklisted.Commands.Receiver.Configuration
             var services = new ServiceCollection()
                 .AddSingleton(configuration)
                 .AddSingleton<IQueueClientFactory, QueueClientFactory>()
-                .AddTransient<CommandHandlerBase>()
+                .AddTransient<ICommandHandlerBase, CommandHandlerBase>()
                 .AddLogging(log =>
                 {
                     log.AddConsole();

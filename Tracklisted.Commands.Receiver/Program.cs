@@ -1,16 +1,10 @@
-﻿using Microsoft.Azure.ServiceBus;
-using Microsoft.Azure.ServiceBus.InteropExtensions;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
-using Newtonsoft.Json;
 using System;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using Tracklisted.Commands.Receiver.CommandHandlers;
 using Tracklisted.Commands.Receiver.Configuration;
-using Tracklisted.Configuration;
 
 namespace Tracklisted.Commands.Receiver
 {
@@ -30,7 +24,7 @@ namespace Tracklisted.Commands.Receiver
         static async Task MainAsync(IServiceProvider serviceProvider)
         {
             logger = serviceProvider.GetRequiredService<ILogger<Program>>();
-            var commandHandler = serviceProvider.GetRequiredService<CommandHandlerBase>();
+            var commandHandler = serviceProvider.GetRequiredService<ICommandHandlerBase>();
 
             logger.LogInformation("===========================");
             logger.LogInformation("Tracklisted client started.");

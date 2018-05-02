@@ -1,15 +1,17 @@
 ﻿using Microsoft.Azure.ServiceBus;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace Tracklisted.Commands.Receiver.CommandHandlers
 {
-    public class CommandHandlerBase
+    public interface ICommandHandlerBase
+    {
+        void RegisterOnMessageHandlerAndReceiveMessages();
+    }
+    public class CommandHandlerBase : ICommandHandlerBase
     {
         protected ILogger<CommandHandlerBase> logger;
         protected IQueueClient queueClient;
