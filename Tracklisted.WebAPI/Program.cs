@@ -19,6 +19,12 @@ namespace Tracklisted.WebAPI
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
-                .UseStartup<Startup>();
+            .ConfigureLogging((ctx, log) =>
+            {
+                log.AddConfiguration(ctx.Configuration.GetSection("Logging"));
+                log.AddConsole();
+                log.AddDebug();
+            })
+            .UseStartup<Startup>();
     }
 }

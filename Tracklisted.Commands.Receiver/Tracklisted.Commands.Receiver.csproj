@@ -9,9 +9,12 @@
     <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="2.1.0-preview2-final" />
     <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" Version="2.1.0-preview2-final" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.1.0-preview2-final" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="2.1.0-preview2-final" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="2.1.0-preview2-final" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Tracklisted.Configuration\Tracklisted.Configuration.csproj" />
+    <ProjectReference Include="..\Tracklisted.Integration.Lastfm\Tracklisted.Integration.Lastfm.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Extensions.Configuration.Abstractions">

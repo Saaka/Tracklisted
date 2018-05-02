@@ -1,6 +1,7 @@
 ﻿using Microsoft.Azure.ServiceBus;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Text;
 using System.Threading;
@@ -13,6 +14,7 @@ namespace Tracklisted.Commands.Receiver
     class Program
     {
         static IQueueClient queueClient;
+        static ILogger logger;
 
         static void Main(string[] args)
         {
@@ -28,11 +30,12 @@ namespace Tracklisted.Commands.Receiver
             try
             {
                 var config = serviceProvider.GetRequiredService<IServiceBusConfiguration>();
+                logger = serviceProvider.GetRequiredService<ILogger<Program>>();
                 queueClient = new QueueClient(config.ServiceBusConnectionString, config.ServiceBusQueue);
 
-                Console.WriteLine("===========================");
-                Console.WriteLine("Tracklisted client started.");
-                Console.WriteLine("============================");
+                logger.LogInformation("===========================");
+                logger.LogInformation("Tracklisted client started.");
+                logger.LogInformation("============================");
 
                 // Register the queue message handler and receive messages in a loop
                 RegisterOnMessageHandlerAndReceiveMessages();
@@ -69,7 +72,7 @@ namespace Tracklisted.Commands.Receiver
         static async Task ProcessMessagesAsync(Message message, CancellationToken token)
         {
             // Process the message.
-            Console.WriteLine($"Received message: SequenceNumber:{message.SystemProperties.SequenceNumber} Body:{Encoding.UTF8.GetString(message.Body)}");
+            logger.LogInformation($"Received message: SequenceNumber:{message.SystemProperties.SequenceNumber} Body:{Encoding.UTF8.GetString(message.Body)}");
 
             // Complete the message so that it is not received again.
             // This can be done only if the queue Client is created in ReceiveMode.PeekLock mode (which is the default).
@@ -83,12 +86,12 @@ namespace Tracklisted.Commands.Receiver
         // Use this handler to examine the exceptions received on the message pump.
         static Task ExceptionReceivedHandler(ExceptionReceivedEventArgs exceptionReceivedEventArgs)
         {
-            Console.WriteLine($"Message handler encountered an exception {exceptionReceivedEventArgs.Exception}.");
+            logger.LogError($"Message handler encountered an exception {exceptionReceivedEventArgs.Exception}.");
             var context = exceptionReceivedEventArgs.ExceptionReceivedContext;
-            Console.WriteLine("Exception context for troubleshooting:");
-            Console.WriteLine($"- Endpoint: {context.Endpoint}");
-            Console.WriteLine($"- Entity Path: {context.EntityPath}");
-            Console.WriteLine($"- Executing Action: {context.Action}");
+            logger.LogError("Exception context for troubleshooting:");
+            logger.LogError($"- Endpoint: {context.Endpoint}");
+            logger.LogError($"- Entity Path: {context.EntityPath}");
+            logger.LogError($"- Executing Action: {context.Action}");
             return Task.CompletedTask;
         }
     }

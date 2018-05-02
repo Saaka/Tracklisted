@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using System;
 using Tracklisted.Configuration;
 
@@ -13,6 +14,10 @@ namespace Tracklisted.Commands.Receiver.Configuration
 
             var services = new ServiceCollection()
                 .AddSingleton(configuration)
+                .AddLogging(log =>
+                {
+                    log.AddConsole();
+                })
                 .RegisterConfiguration();
 
             return services.

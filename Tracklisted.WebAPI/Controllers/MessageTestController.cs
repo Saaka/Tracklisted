@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 using System;
 using System.Threading.Tasks;
 using Tracklisted.Commands;
@@ -11,17 +12,21 @@ namespace Tracklisted.WebAPI.Controllers
     public class MessageTestController : ControllerBase
     {
         private readonly IMessageSenderClient _senderClient;
+        private readonly ILogger<MessageTestController> _logger;
 
-        public MessageTestController(IMessageSenderClient senderClient)
+        public MessageTestController(IMessageSenderClient senderClient,
+            ILogger<MessageTestController> logger)
         {
             _senderClient = senderClient;
+            _logger = logger;
         }
         
         [HttpPost]
         public async Task<IActionResult> PostMessage()
-        {
+        {   
             string messageId = Guid.NewGuid()
                 .ToString();
+            _logger.LogInformation($"Created message with id {messageId}");
 
             await _senderClient
                 .Send(new TestMessage { CommandId = messageId });
