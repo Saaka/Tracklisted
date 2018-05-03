@@ -2,7 +2,7 @@
 using System;
 using Tracklisted.Configuration;
 
-namespace Tracklisted.Commands.Receiver.CommandHandlers
+namespace Tracklisted.Commands.Receiver.Queue
 {
     public interface IQueueClientFactory : IDisposable
     {

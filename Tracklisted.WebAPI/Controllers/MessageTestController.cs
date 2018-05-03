@@ -3,6 +3,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Threading.Tasks;
 using Tracklisted.Commands;
+using Tracklisted.Commands.GetArtistTopTracks;
 using Tracklisted.Commands.Sender;
 
 namespace Tracklisted.WebAPI.Controllers
@@ -22,25 +23,16 @@ namespace Tracklisted.WebAPI.Controllers
         }
         
         [HttpPost]
-        public async Task<IActionResult> PostMessage()
+        public async Task<IActionResult> PostMessage(string artistName)
         {   
             string messageId = Guid.NewGuid()
                 .ToString();
             _logger.LogInformation($"Created message with id {messageId}");
 
             await _senderClient
-                .Send(new TestCommand { CommandId = messageId, Sample = "Sample" });
+                .Send(new GetArtistTopTracksCommand { CommandId = messageId, ArtistName = artistName });
             
             return new JsonResult(messageId);
         }
-    }
-
-    internal class TestCommand : BaseCommand
-    {
-        public TestCommand()
-        {
-            CommandType = CommandType.GetArtist;
-        }
-        public string Sample { get; set; }
     }
 }
