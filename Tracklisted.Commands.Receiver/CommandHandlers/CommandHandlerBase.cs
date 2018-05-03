@@ -23,18 +23,23 @@ namespace Tracklisted.Commands.Receiver.CommandHandlers
             this.queueClient = queueClientFactory.GetQueueClient();
         }
 
-        public void RegisterOnMessageHandlerAndReceiveMessages()
+        public virtual void RegisterOnMessageHandlerAndReceiveMessages()
         {
-            var messageHandlerOptions = new MessageHandlerOptions(ExceptionReceivedHandler)
+            var messageHandlerOptions = GetMessageHandlerOptions();
+
+            queueClient.RegisterMessageHandler(ProcessMessagesAsync, messageHandlerOptions);
+        }
+
+        protected virtual MessageHandlerOptions GetMessageHandlerOptions()
+        {
+            return new MessageHandlerOptions(ExceptionReceivedHandler)
             {
                 MaxConcurrentCalls = 10,
                 AutoComplete = false
             };
-            
-            queueClient.RegisterMessageHandler(ProcessMessagesAsync, messageHandlerOptions);
         }
-    
-        protected async Task ProcessMessagesAsync(Message message, CancellationToken token)
+
+        protected virtual async Task ProcessMessagesAsync(Message message, CancellationToken token)
         {
             var body = Encoding.UTF8.GetString(message.Body);
             var command = JsonConvert.DeserializeObject<BaseCommand>(body);
@@ -44,7 +49,7 @@ namespace Tracklisted.Commands.Receiver.CommandHandlers
             await queueClient.CompleteAsync(message.SystemProperties.LockToken);
         }
 
-        protected Task ExceptionReceivedHandler(ExceptionReceivedEventArgs exceptionReceivedEventArgs)
+        protected virtual Task ExceptionReceivedHandler(ExceptionReceivedEventArgs exceptionReceivedEventArgs)
         {
             logger.LogError($"Message handler encountered an exception {exceptionReceivedEventArgs.Exception}.");
             var context = exceptionReceivedEventArgs.ExceptionReceivedContext;
