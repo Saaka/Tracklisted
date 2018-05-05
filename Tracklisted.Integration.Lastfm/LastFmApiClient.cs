@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Tracklisted.Integration.Lastfm.Base.Request;
 using Tracklisted.Integration.Lastfm.Configuration;
-using Tracklisted.Integration.Lastfm.Models;
 
 namespace Tracklisted.Integration.Lastfm
 {
@@ -22,24 +22,24 @@ namespace Tracklisted.Integration.Lastfm
             _client.BaseAddress = new Uri(lastfmConfig.Url);
         }
 
-        public async Task<HttpResponseMessage> CallGetMethod<TRequest, TResponse>(TRequest request, string parameters)
+        public async Task<HttpResponseMessage> CallGetMethod<TRequest>(TRequest request, string parameters)
             where TRequest : class
-            where TResponse : class
         {
             string requestUrl = AddRequestParameters(request);
             return await _client.GetAsync(requestUrl);
         }
 
-        private string AddRequestParameters<TRequest>(TRequest request)
+        protected string AddRequestParameters<TRequest>(TRequest request)
             where TRequest : class
         {
             string requestUrl = string.Empty;
             requestUrl = AddPageableParameters(request as IPageable, requestUrl);
+            requestUrl = $"{requestUrl}&format=json&api_key={_apiKey}";
 
             return requestUrl;
         }
 
-        private string AddPageableParameters(IPageable request, string requestUrl)
+        protected string AddPageableParameters(IPageable request, string requestUrl)
         {
             if (request == null) return requestUrl;
 

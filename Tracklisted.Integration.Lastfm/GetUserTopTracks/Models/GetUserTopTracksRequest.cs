@@ -1,4 +1,7 @@
-﻿namespace Tracklisted.Integration.Lastfm.Models.User.GetTopTracks
+﻿using Tracklisted.Integration.Lastfm.Base;
+using Tracklisted.Integration.Lastfm.Base.Request;
+
+namespace Tracklisted.Integration.Lastfm.GetUserTopTracks.Models
 {
     public class GetUserTopTracksRequest : IPageable
     {
@@ -6,10 +9,10 @@
         {
             Limit = 50;
             Page = 1;
-            Period = UserTopTracksPeriod.Overall;
+            Period = PeriodType.Overall;
         }
         public string User { get; set; }
-        public UserTopTracksPeriod Period { get; set; }
+        public PeriodType Period { get; set; }
         public int Limit { get; set; }
         public int Page { get; set; }
     }

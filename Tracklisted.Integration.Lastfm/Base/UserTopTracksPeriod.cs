@@ -1,6 +1,6 @@
-﻿namespace Tracklisted.Integration.Lastfm.Models.User.GetTopTracks
+﻿namespace Tracklisted.Integration.Lastfm.Base
 {
-    public enum UserTopTracksPeriod
+    public enum PeriodType
     {
         Overall,
         Day7,

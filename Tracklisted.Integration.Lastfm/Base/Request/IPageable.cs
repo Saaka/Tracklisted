@@ -1,4 +1,4 @@
-﻿namespace Tracklisted.Integration.Lastfm.Models
+﻿namespace Tracklisted.Integration.Lastfm.Base.Request
 {
     public interface IPageable
     {
