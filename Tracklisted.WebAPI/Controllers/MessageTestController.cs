@@ -21,17 +21,17 @@ namespace Tracklisted.WebAPI.Controllers
             _senderClient = senderClient;
             _logger = logger;
         }
-        
+
         [HttpPost]
         public async Task<IActionResult> PostMessage(string artistName)
-        {   
-            string messageId = Guid.NewGuid()
-                .ToString();
+        {
+            string messageId = Guid.NewGuid().ToString();
+
             _logger.LogInformation($"Created message with id {messageId}");
 
             await _senderClient
                 .Send(new GetArtistTopTracksCommand { CommandId = messageId, ArtistName = artistName });
-            
+
             return new JsonResult(messageId);
         }
     }

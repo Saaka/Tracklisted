@@ -9,7 +9,7 @@ namespace Tracklisted.Integration.Lastfm.Configuration
         public static IServiceCollection RegisterLastfmModule(this IServiceCollection services, IConfiguration configuration)
         {
             services
-                .RegisterHttpClient<LastFmApiClient>();
+                .RegisterHttpClient<LastfmApiClient>();
 
             services
                 .AddSingleton<ILastfmConfiguration, LastfmConfiguration>();
