@@ -2,6 +2,7 @@
 {
     public enum CommandType
     {
-        GetArtistTopTracks
+        GetArtistTopTracks,
+        GetUserTopTracks
     }
 }

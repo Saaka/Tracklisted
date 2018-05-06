@@ -11,7 +11,10 @@ namespace Tracklisted.Integration.Lastfm.GetUserTopTracks.Models
         public string Name { get; set; }
         [JsonProperty("playcount")]
         public int PlayCount { get; set; }
-        public int Rank { get; set; }
+        [JsonProperty("@attr")]
+        public Rank RankAttr { get; set; }
+        [JsonIgnore]
+        public int Rank => RankAttr.Value;
         [JsonProperty("mbid")]
         public string MusicBrainzID { get; set; }
         [JsonProperty("url")]
@@ -21,5 +24,11 @@ namespace Tracklisted.Integration.Lastfm.GetUserTopTracks.Models
         public ArtistSimple Artist { get; set; }
         [JsonProperty("image")]
         public List<ImageInfo> Images { get; set; }
+    }
+
+    public class Rank
+    {
+        [JsonProperty("rank")]
+        public int Value { get; set; }
     }
 }

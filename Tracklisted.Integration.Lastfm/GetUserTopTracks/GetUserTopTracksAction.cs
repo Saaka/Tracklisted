@@ -4,7 +4,11 @@ using Tracklisted.Integration.Lastfm.GetUserTopTracks.Models;
 
 namespace Tracklisted.Integration.Lastfm.GetUserTopTracks
 {
-    public class GetUserTopTracksAction : BaseAction<GetUserTopTracksRequest, GetUserTopTracksResponse>
+    public interface IGetUserTopTracksAction
+    {
+        Task<GetUserTopTracksResponse> Execute(GetUserTopTracksRequest request);
+    }
+    public class GetUserTopTracksAction : BaseAction<GetUserTopTracksRequest, GetUserTopTracksResponse>, IGetUserTopTracksAction
     {
         private readonly IPeriodMapper _periodMapper;
         private const string MethodName = "user.gettoptracks";
@@ -19,7 +23,7 @@ namespace Tracklisted.Integration.Lastfm.GetUserTopTracks
 
         public override async Task<GetUserTopTracksResponse> Execute(GetUserTopTracksRequest request)
         {
-            string requestUrl = $"method={MethodName}&user={request.User}&period={_periodMapper.GetPeriod(request.Period)}";
+            string requestUrl = $"?method={MethodName}&user={request.User}&period={_periodMapper.GetPeriod(request.Period)}";
             var httpResponse = await _apiClient.CallGetMethod(request, requestUrl);
             var result = await GetSerializedResponse(httpResponse);
 

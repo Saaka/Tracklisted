@@ -1,5 +1,5 @@
 ﻿using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
+using System;
 
 namespace Tracklisted.Integration.Lastfm.Models
 {
@@ -8,7 +8,17 @@ namespace Tracklisted.Integration.Lastfm.Models
         [JsonProperty("#text")]
         public string Url { get; set; }
         [JsonProperty("size")]
-        [JsonConverter(typeof(StringEnumConverter), true)]
-        public ImageSize ImageSize { get; set; }
+        public string Size { get; set; }
+        [JsonIgnore()]
+        public ImageSize ImageSize
+        {
+            get
+            {
+                if (Enum.TryParse(Size, true, out ImageSize size))
+                    return size;
+
+                return ImageSize.Other;
+            }
+        }
     }
 }

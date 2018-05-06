@@ -22,17 +22,17 @@ namespace Tracklisted.Integration.Lastfm
             _client.BaseAddress = new Uri(lastfmConfig.Url);
         }
 
-        public async Task<HttpResponseMessage> CallGetMethod<TRequest>(TRequest request, string parameters)
+        public async Task<HttpResponseMessage> CallGetMethod<TRequest>(TRequest request, string requestParameters)
             where TRequest : class
         {
-            string requestUrl = AddRequestParameters(request);
+            string requestUrl = AddRequestParameters(request, requestParameters);
             return await _client.GetAsync(requestUrl);
         }
 
-        protected string AddRequestParameters<TRequest>(TRequest request)
+        protected string AddRequestParameters<TRequest>(TRequest request, string requestParameters)
             where TRequest : class
         {
-            string requestUrl = string.Empty;
+            string requestUrl = requestParameters;
             requestUrl = AddPageableParameters(request as IPageable, requestUrl);
             requestUrl = $"{requestUrl}&format=json&api_key={_apiKey}";
 

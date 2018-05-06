@@ -14,7 +14,8 @@ namespace Tracklisted.Commands.Receiver.Configuration
                 .AddScoped<ICommandBodyMapper, CommandBodyMapper>();
 
             services
-                .AddTransient<GetArtistTopTracksCommandHandler>();                
+                .AddTransient<GetArtistTopTracksCommandHandler>()
+                .AddTransient<GetUserTopTracksCommandHandler>();                
 
             return services;
         }

@@ -4,6 +4,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using Tracklisted.Commands.Receiver.Queue;
 using Tracklisted.Configuration;
+using Tracklisted.Integration.Lastfm.Configuration;
 
 namespace Tracklisted.Commands.Receiver.Configuration
 {
@@ -17,6 +18,7 @@ namespace Tracklisted.Commands.Receiver.Configuration
                 .AddSingleton(configuration)
                 .AddSingleton<IQueueClientFactory, QueueClientFactory>()
                 .AddTransient<IQueueMessageReceiver, QueueMessageReceiver>()
+                .RegisterLastfmModule(configuration)
                 .RegisterCommandHandlers()
                 .AddLogging(log =>
                 {

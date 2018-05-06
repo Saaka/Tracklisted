@@ -34,5 +34,18 @@ namespace Tracklisted.WebAPI.Controllers
 
             return new JsonResult(messageId);
         }
+
+        [HttpPost("userTopTracks")]
+        public async Task<IActionResult> GetUserTopTracks(string user)
+        {
+            string messageId = Guid.NewGuid().ToString();
+
+            _logger.LogInformation($"Created message with id {messageId}");
+
+            await _senderClient
+                .Send(new GetUserTopTracksCommand { CommandId = messageId, User = user});
+
+            return new JsonResult(messageId);
+        }
     }
 }

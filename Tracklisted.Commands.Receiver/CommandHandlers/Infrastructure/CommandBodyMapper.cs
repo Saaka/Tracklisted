@@ -23,6 +23,8 @@ namespace Tracklisted.Commands.Receiver.CommandHandlers.Infrastructure
             {
                 case CommandType.GetArtistTopTracks:
                     return JsonConvert.DeserializeObject<GetArtistTopTracksCommand>(commandBody);
+                case CommandType.GetUserTopTracks:
+                    return JsonConvert.DeserializeObject<GetUserTopTracksCommand>(commandBody);
                 default:
                     throw new ArgumentException("Invalid command type");
             }

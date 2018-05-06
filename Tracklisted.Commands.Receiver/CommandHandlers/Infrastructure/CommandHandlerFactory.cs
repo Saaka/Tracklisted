@@ -24,6 +24,8 @@ namespace Tracklisted.Commands.Receiver.CommandHandlers.Infrastructure
             {
                 case CommandType.GetArtistTopTracks:
                     return _serviceProvider.GetRequiredService<GetArtistTopTracksCommandHandler>();
+                case CommandType.GetUserTopTracks:
+                    return _serviceProvider.GetRequiredService<GetUserTopTracksCommandHandler>();
                 default:
                     throw new ArgumentException("Invalid command type");
             }
