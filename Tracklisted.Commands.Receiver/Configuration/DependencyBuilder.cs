@@ -24,6 +24,7 @@ namespace Tracklisted.Commands.Receiver.Configuration
                 {
                     log.AddConsole();
                 })
+                .AddMemoryCache()
                 .RegisterConfiguration();
 
             return services.
