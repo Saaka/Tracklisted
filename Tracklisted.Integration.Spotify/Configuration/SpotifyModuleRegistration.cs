@@ -12,6 +12,7 @@ namespace Tracklisted.Integration.Spotify.Configuration
             services
                 .RegisterHttpClient<SpotifyApiClient>()
                 .RegisterHttpClient<SpotifyAuthApiClient>()
+                .AddSingleton<ISpotifyConfiguration, SpotifyConfiguration>()
                 .AddTransient<ISpotifyClientTokenProvider, SpotifyClientTokenProvider>()
                 .AddTransient<IGetSeveralTracksAction, GetSeveralTracksAction>();
 

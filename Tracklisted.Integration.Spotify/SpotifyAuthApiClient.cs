@@ -56,8 +56,6 @@ namespace Tracklisted.Integration.Spotify
                 RequestUri = new Uri(_authUrl)
             };
             request.Headers.Clear();
-            request.Headers.Accept
-                .Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue(MediaType));
             request.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Basic", CreateAuthHeaderValue());
 
             return request;

@@ -25,7 +25,7 @@ namespace Tracklisted.Integration.Spotify.GetSeveralTracks
 
         public override async Task<GetSeveralTracksResponse> Execute(GetSeveralTracksRequest request)
         {
-            string requestUrl = $"/{MethodName}?ids={GetTrackIdsString(request.TrackIds)}";
+            string requestUrl = $"{MethodName}?ids={GetTrackIdsString(request.TrackIds)}";
             var httpResponse = await spotifyApiClient.CallGetMethod(request, requestUrl);
             var result = await GetSerializedResponse(httpResponse);
 
