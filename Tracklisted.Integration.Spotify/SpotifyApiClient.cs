@@ -1,33 +1,57 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
+using Tracklisted.Integration.Spotify.Base;
 using Tracklisted.Integration.Spotify.Configuration;
 
 namespace Tracklisted.Integration.Spotify
 {
-    class SpotifyApiClient
+    public class SpotifyApiClient
     {
-        private readonly HttpClient _client;
-        private readonly ISpotifyConfiguration _spotifyConfig;
+        private readonly HttpClient client;
+        private readonly ISpotifyConfiguration spotifyConfig;
+        private readonly ISpotifyClientTokenProvider spotifyClientTokenProvider;
+        private readonly string baseUrl;
+
+        private const string ClientAuthScheme = "Bearer";
 
         public SpotifyApiClient(HttpClient client,
-            ISpotifyConfiguration spotifyConfig)
+            ISpotifyConfiguration spotifyConfig,
+            ISpotifyClientTokenProvider spotifyClientTokenProvider)
         {
-            _client = client;
-            _spotifyConfig = spotifyConfig;
-
-            _client.BaseAddress = new Uri(spotifyConfig.Url);
+            this.client = client;
+            this.spotifyConfig = spotifyConfig;
+            this.spotifyClientTokenProvider = spotifyClientTokenProvider;
+            this.baseUrl = spotifyConfig.Url;
         }
 
-        public async Task<HttpResponseMessage> CallGetMethod<TRequest>(TRequest request, 
-            string requestUrl, 
-            bool useClientAuthorization = true, 
+        public async Task<HttpResponseMessage> CallGetMethod<TRequest>(TRequest request,
+            string requestUrl,
+            bool useClientAuthorization = true,
             bool useUserAuthorization = false)
             where TRequest : class
         {
-            return await _client.GetAsync(requestUrl);
+            var httpRequest = await CreateGetRequest(requestUrl, useClientAuthorization);
+
+            return await client.SendAsync(httpRequest);
+        }
+
+        private async Task<HttpRequestMessage> CreateGetRequest(string requestUrl,
+            bool useClientAuthorization)
+        {
+            var request = new HttpRequestMessage
+            {
+                Method = HttpMethod.Get,
+                RequestUri = new Uri($"{baseUrl}/{requestUrl}")
+            };
+            if(useClientAuthorization)
+            {
+                var token = await spotifyClientTokenProvider.GetClientAuthToken();
+                request.Headers.Authorization =
+                    new System.Net.Http.Headers.AuthenticationHeaderValue(ClientAuthScheme, token);
+            }
+
+            return request;
         }
     }
 }

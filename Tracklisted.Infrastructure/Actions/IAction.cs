@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace Tracklisted.Integration.Lastfm.Base
+namespace Tracklisted.Infrastructure.Actions
 {
     public interface IAction<TRequest, TResponse>
             where TRequest : class

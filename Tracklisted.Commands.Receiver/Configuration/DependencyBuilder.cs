@@ -5,11 +5,14 @@ using System;
 using Tracklisted.Commands.Receiver.Queue;
 using Tracklisted.Configuration;
 using Tracklisted.Integration.Lastfm.Configuration;
+using Tracklisted.Integration.Spotify.Configuration;
 
 namespace Tracklisted.Commands.Receiver.Configuration
 {
     public class DependencyBuilder
     {
+        const string EnvironmentVariableName = "ASPNETCORE_ENVIRONMENT";
+
         public static IServiceProvider Build()
         {
             var configuration = BuildConfiguration();
@@ -19,6 +22,7 @@ namespace Tracklisted.Commands.Receiver.Configuration
                 .AddSingleton<IQueueClientFactory, QueueClientFactory>()
                 .AddTransient<IQueueMessageReceiver, QueueMessageReceiver>()
                 .RegisterLastfmModule(configuration)
+                .RegisterSpotifyModule()
                 .RegisterCommandHandlers()
                 .AddLogging(log =>
                 {
@@ -33,7 +37,7 @@ namespace Tracklisted.Commands.Receiver.Configuration
 
         public static IConfiguration BuildConfiguration()
         {
-            var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+            var environment = Environment.GetEnvironmentVariable(EnvironmentVariableName);
             
             var builder = new ConfigurationBuilder()
                 .AddJsonFile($"appsettings.json", false)

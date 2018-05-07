@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Tracklisted.Infrastructure.Actions;
 using Tracklisted.Integration.Lastfm.Base;
 using Tracklisted.Integration.Lastfm.GetUserTopTracks.Models;
 
@@ -8,23 +9,25 @@ namespace Tracklisted.Integration.Lastfm.GetUserTopTracks
     {
         Task<GetUserTopTracksResponse> Execute(GetUserTopTracksRequest request);
     }
-    public class GetUserTopTracksAction : BaseAction<GetUserTopTracksRequest, GetUserTopTracksResponse>, IGetUserTopTracksAction
+    public class GetUserTopTracksAction : BaseHttpAction<GetUserTopTracksRequest, GetUserTopTracksResponse>, IGetUserTopTracksAction
     {
-        private readonly IPeriodMapper _periodMapper;
+        private readonly LastfmApiClient apiClient;
+        private readonly IPeriodMapper periodMapper;
+
         private const string MethodName = "user.gettoptracks";
 
         public GetUserTopTracksAction(
             LastfmApiClient apiClient,
-            IPeriodMapper periodMapper) 
-            : base(apiClient)
+            IPeriodMapper periodMapper)
         {
-            _periodMapper = periodMapper;
+            this.apiClient = apiClient;
+            this.periodMapper = periodMapper;
         }
 
         public override async Task<GetUserTopTracksResponse> Execute(GetUserTopTracksRequest request)
         {
-            string requestUrl = $"?method={MethodName}&user={request.User}&period={_periodMapper.GetPeriod(request.Period)}";
-            var httpResponse = await _apiClient.CallGetMethod(request, requestUrl);
+            string requestUrl = $"?method={MethodName}&user={request.User}&period={periodMapper.GetPeriod(request.Period)}";
+            var httpResponse = await apiClient.CallGetMethod(request, requestUrl);
             var result = await GetSerializedResponse(httpResponse);
 
             return result;

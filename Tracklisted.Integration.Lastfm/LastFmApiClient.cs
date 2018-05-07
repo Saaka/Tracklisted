@@ -8,25 +8,23 @@ namespace Tracklisted.Integration.Lastfm
 {
     public class LastfmApiClient
     {
-        private readonly HttpClient _client;
-        private readonly ILastfmConfiguration _lastfmConfig;
-        private readonly string _apiKey;
+        private readonly HttpClient client;
+        private readonly ILastfmConfiguration lastfmConfig;
 
         public LastfmApiClient(HttpClient client,
             ILastfmConfiguration lastfmConfig)
         {
-            _client = client;
-            _lastfmConfig = lastfmConfig;
-
-            _apiKey = lastfmConfig.ApiKey;
-            _client.BaseAddress = new Uri(lastfmConfig.Url);
+            this.client = client;
+            this.lastfmConfig = lastfmConfig;
+            
+            this.client.BaseAddress = new Uri(lastfmConfig.Url);
         }
 
         public async Task<HttpResponseMessage> CallGetMethod<TRequest>(TRequest request, string requestParameters)
             where TRequest : class
         {
             string requestUrl = AddRequestParameters(request, requestParameters);
-            return await _client.GetAsync(requestUrl);
+            return await client.GetAsync(requestUrl);
         }
 
         protected string AddRequestParameters<TRequest>(TRequest request, string requestParameters)
@@ -34,7 +32,7 @@ namespace Tracklisted.Integration.Lastfm
         {
             string requestUrl = requestParameters;
             requestUrl = AddPageableParameters(request as IPageable, requestUrl);
-            requestUrl = $"{requestUrl}&format=json&api_key={_apiKey}";
+            requestUrl = $"{requestUrl}&format=json&api_key={lastfmConfig.ApiKey}";
 
             return requestUrl;
         }
