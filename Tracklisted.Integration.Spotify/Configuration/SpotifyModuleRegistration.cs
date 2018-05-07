@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Tracklisted.Infrastructure.Configuration;
 using Tracklisted.Integration.Spotify.Base;
+using Tracklisted.Integration.Spotify.GetSeveralTracks;
 
 namespace Tracklisted.Integration.Spotify.Configuration
 {
@@ -11,7 +12,8 @@ namespace Tracklisted.Integration.Spotify.Configuration
             services
                 .RegisterHttpClient<SpotifyApiClient>()
                 .RegisterHttpClient<SpotifyAuthApiClient>()
-                .AddTransient<ISpotifyClientTokenProvider, SpotifyClientTokenProvider>();
+                .AddTransient<ISpotifyClientTokenProvider, SpotifyClientTokenProvider>()
+                .AddTransient<IGetSeveralTracksAction, GetSeveralTracksAction>();
 
             return services;
         }
