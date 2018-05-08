@@ -9,7 +9,12 @@ using Tracklisted.Integration.Spotify.Models;
 
 namespace Tracklisted.Integration.Spotify
 {
-    public class SpotifyAuthApiClient
+    public interface ISpotifyAuthApiClient
+    {
+        Task<ClientAuthResponse> GetClientAuthorizationToken();
+    }
+
+    public class SpotifyAuthApiClient : ISpotifyAuthApiClient
     {
         private readonly HttpClient _client;
         private readonly ISpotifyConfiguration _spotifyConfig;

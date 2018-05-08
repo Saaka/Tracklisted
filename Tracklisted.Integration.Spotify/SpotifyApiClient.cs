@@ -6,7 +6,15 @@ using Tracklisted.Integration.Spotify.Configuration;
 
 namespace Tracklisted.Integration.Spotify
 {
-    public class SpotifyApiClient
+    public interface ISpotifyApiClient
+    {
+        Task<HttpResponseMessage> CallGetMethod<TRequest>(TRequest request,
+            string requestUrl,
+            bool useClientAuthorization = true,
+            bool useUserAuthorization = false)
+            where TRequest : class;
+    }
+    public class SpotifyApiClient : ISpotifyApiClient
     {
         private readonly HttpClient client;
         private readonly ISpotifyConfiguration spotifyConfig;
