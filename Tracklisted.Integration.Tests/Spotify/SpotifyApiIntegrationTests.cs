@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 using Tracklisted.Integration.Spotify.GetSeveralTracks;
+using Tracklisted.Integration.Spotify.GetSeveralTracks.Models;
+using Tracklisted.Integration.Spotify.SearchForTrack;
+using Tracklisted.Integration.Spotify.SearchForTrack.Models;
 using Xunit;
 
 namespace Tracklisted.Integration.Tests.Spotify
@@ -24,7 +27,7 @@ namespace Tracklisted.Integration.Tests.Spotify
             var action = fixture
                 .GetService<IGetSeveralTracksAction>();
 
-            var request = new Integration.Spotify.GetSeveralTracks.Models.GetSeveralTracksRequest
+            var request = new GetSeveralTracksRequest
             {
                 TrackIds = new List<string>
                 {
@@ -36,6 +39,24 @@ namespace Tracklisted.Integration.Tests.Spotify
 
             Assert.NotNull(result);
             Assert.Equal(request.TrackIds.Count, result.Tracks.Count);
+        }
+
+        [Fact]
+        public async Task SearchForTrackTest()
+        {
+            var action = fixture
+                .GetService<ISearchForTrackAction>();
+
+            var request = new SearchForTrackRequest
+            {
+                Market = "pl",
+                TrackName = "Enter Sandman"
+            };
+
+            var result = await action.Execute(request);
+
+            Assert.NotNull(result);
+            Assert.NotNull(result.Response);
         }
     }
 }

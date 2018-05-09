@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Tracklisted.Infrastructure.Actions
 {
-    public abstract class BaseHttpAction<TRequest, TResult> : IAction<TRequest, TResult>
+    public abstract class BaseHttpAction<TRequest, TResult>
         where TRequest : class
         where TResult : class
     {
@@ -15,10 +15,8 @@ namespace Tracklisted.Infrastructure.Actions
         {
             _serializer = new DataContractJsonSerializer(typeof(TResult));
         }
-
-        public abstract Task<TResult> Execute(TRequest request);
-
-        public async Task<TResult> GetSerializedResponse(HttpResponseMessage responseMessage)
+       
+        protected async Task<TResult> GetSerializedResponse(HttpResponseMessage responseMessage)
         {
             var responseString = await responseMessage.Content.ReadAsStringAsync();
 

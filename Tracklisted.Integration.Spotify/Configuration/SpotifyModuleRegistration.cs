@@ -2,6 +2,7 @@
 using Tracklisted.Infrastructure.Configuration;
 using Tracklisted.Integration.Spotify.Base;
 using Tracklisted.Integration.Spotify.GetSeveralTracks;
+using Tracklisted.Integration.Spotify.SearchForTrack;
 
 namespace Tracklisted.Integration.Spotify.Configuration
 {
@@ -14,7 +15,9 @@ namespace Tracklisted.Integration.Spotify.Configuration
                 .RegisterHttpClient<SpotifyAuthApiClient>()
                 .AddSingleton<ISpotifyConfiguration, SpotifyConfiguration>()
                 .AddTransient<ISpotifyClientTokenProvider, SpotifyClientTokenProvider>()
-                .AddTransient<IGetSeveralTracksAction, GetSeveralTracksAction>();
+                
+                .AddTransient<IGetSeveralTracksAction, GetSeveralTracksAction>()
+                .AddTransient<ISearchForTrackAction, SearchForTrackAction>();
 
             return services;
         }

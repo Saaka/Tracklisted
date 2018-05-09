@@ -24,7 +24,7 @@ namespace Tracklisted.Integration.Lastfm.GetUserTopTracks
             this.periodMapper = periodMapper;
         }
 
-        public override async Task<GetUserTopTracksResponse> Execute(GetUserTopTracksRequest request)
+        public async Task<GetUserTopTracksResponse> Execute(GetUserTopTracksRequest request)
         {
             string requestUrl = $"?method={MethodName}&user={request.User}&period={periodMapper.GetPeriod(request.Period)}";
             var httpResponse = await apiClient.CallGetMethod(request, requestUrl);
