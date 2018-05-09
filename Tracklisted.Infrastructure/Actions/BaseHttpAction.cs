@@ -5,8 +5,7 @@ using System.Threading.Tasks;
 
 namespace Tracklisted.Infrastructure.Actions
 {
-    public abstract class BaseHttpAction<TRequest, TResult>
-        where TRequest : class
+    public abstract class BaseHttpAction<TResult>
         where TResult : class
     {
         protected readonly DataContractJsonSerializer _serializer;

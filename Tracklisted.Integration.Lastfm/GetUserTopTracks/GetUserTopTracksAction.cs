@@ -9,7 +9,7 @@ namespace Tracklisted.Integration.Lastfm.GetUserTopTracks
     {
         Task<GetUserTopTracksResponse> Execute(GetUserTopTracksRequest request);
     }
-    public class GetUserTopTracksAction : BaseHttpAction<GetUserTopTracksRequest, GetUserTopTracksResponse>, IGetUserTopTracksAction
+    public class GetUserTopTracksAction : BaseHttpAction<GetUserTopTracksResponse>, IGetUserTopTracksAction
     {
         private readonly LastfmApiClient apiClient;
         private readonly IPeriodMapper periodMapper;

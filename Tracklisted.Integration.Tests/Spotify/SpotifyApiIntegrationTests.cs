@@ -56,7 +56,7 @@ namespace Tracklisted.Integration.Tests.Spotify
             var result = await action.Execute(request);
 
             Assert.NotNull(result);
-            Assert.NotNull(result.Response);
+            Assert.NotNull(result.Tracks);
         }
     }
 }

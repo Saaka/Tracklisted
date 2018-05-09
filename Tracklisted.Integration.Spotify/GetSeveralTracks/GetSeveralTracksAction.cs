@@ -11,7 +11,7 @@ namespace Tracklisted.Integration.Spotify.GetSeveralTracks
         Task<GetSeveralTracksResponse> Execute(GetSeveralTracksRequest request);
     }
 
-    public class GetSeveralTracksAction : BaseHttpAction<GetSeveralTracksRequest, GetSeveralTracksResponse>, IGetSeveralTracksAction
+    public class GetSeveralTracksAction : BaseHttpAction<GetSeveralTracksResponse>, IGetSeveralTracksAction
     {
         private readonly SpotifyApiClient spotifyApiClient;
 

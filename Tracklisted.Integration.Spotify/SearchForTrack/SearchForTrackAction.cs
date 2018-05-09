@@ -7,9 +7,9 @@ namespace Tracklisted.Integration.Spotify.SearchForTrack
 {
     public interface ISearchForTrackAction
     {
-        Task<SearchForTrackResponseWrapper> Execute(SearchForTrackRequest request);
+        Task<SearchForTrackResponse> Execute(SearchForTrackRequest request);
     }
-    public class SearchForTrackAction : BaseHttpAction<SearchForTrackRequest, SearchForTrackResponseWrapper>, ISearchForTrackAction
+    public class SearchForTrackAction : BaseHttpAction<SearchForTrackResponseWrapper>, ISearchForTrackAction
     {
         private readonly SpotifyApiClient spotifyApiClient;
 
@@ -21,13 +21,13 @@ namespace Tracklisted.Integration.Spotify.SearchForTrack
             this.spotifyApiClient = spotifyApiClient;
         }
 
-        public async Task<SearchForTrackResponseWrapper> Execute(SearchForTrackRequest request)
+        public async Task<SearchForTrackResponse> Execute(SearchForTrackRequest request)
         {
             string requestUrl = $"{MethodName}?type=track&offset={request.Offset}&limit={request.Limit}&market={request.Market}&q={CreateQuery(request)}";
             var httpResponse = await spotifyApiClient.CallGetMethod(request, requestUrl);
             var result = await GetSerializedResponse(httpResponse);
 
-            return result;
+            return result?.Response;
         }
 
         private string CreateQuery(SearchForTrackRequest request)
