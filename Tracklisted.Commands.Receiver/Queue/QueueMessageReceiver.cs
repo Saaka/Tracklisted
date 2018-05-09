@@ -63,7 +63,7 @@ namespace Tracklisted.Commands.Receiver.Queue
 
             await commandHandler
                 .HandleCommand(command);
-            
+
             await _queueClient.CompleteAsync(message.SystemProperties.LockToken);
         }
 

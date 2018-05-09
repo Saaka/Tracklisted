@@ -6,7 +6,13 @@ using Tracklisted.Integration.Lastfm.Configuration;
 
 namespace Tracklisted.Integration.Lastfm
 {
-    public class LastfmApiClient
+    public interface ILastfmApiClient
+    {
+        Task<HttpResponseMessage> CallGetMethod<TRequest>(TRequest request, string requestParameters)
+            where TRequest : class;
+    }
+
+    public class LastfmApiClient : ILastfmApiClient
     {
         private readonly HttpClient client;
         private readonly ILastfmConfiguration lastfmConfig;
