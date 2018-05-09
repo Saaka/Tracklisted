@@ -3,7 +3,7 @@ using Polly;
 
 namespace Tracklisted.Infrastructure.Configuration
 {
-    public static class HttpRegistrationModule
+    public static class HttpRegistrationExtensions
     {
         private const string HeaderAccept = "Accept";
         private const string AcceptJson = "application/json";
@@ -23,7 +23,7 @@ namespace Tracklisted.Infrastructure.Configuration
                         .Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue(AcceptJson));
                 })
                 .AddTransientHttpErrorPolicy(pb => pb.RetryAsync(2));
-
+            
             return services;
         }
 

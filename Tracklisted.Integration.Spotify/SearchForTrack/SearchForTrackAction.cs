@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
-using Tracklisted.Infrastructure.Actions;
+using Tracklisted.Infrastructure.HttpClient;
 using Tracklisted.Integration.Spotify.SearchForTrack.Models;
 
 namespace Tracklisted.Integration.Spotify.SearchForTrack
@@ -9,23 +9,24 @@ namespace Tracklisted.Integration.Spotify.SearchForTrack
     {
         Task<SearchForTrackResponse> Execute(SearchForTrackRequest request);
     }
-    public class SearchForTrackAction : BaseHttpAction<SearchForTrackResponseWrapper>, ISearchForTrackAction
+    public class SearchForTrackAction : ISearchForTrackAction
     {
         private readonly SpotifyApiClient spotifyApiClient;
+        private readonly IJsonResponseContentDeserializer contentDeserializer;
 
-        private const string MethodName = "search";
-        private const int MaximumTracksPerRequest = 50;
-
-        public SearchForTrackAction(SpotifyApiClient spotifyApiClient)
+        public SearchForTrackAction(SpotifyApiClient spotifyApiClient,
+            IJsonResponseContentDeserializer contentDeserializer)
         {
             this.spotifyApiClient = spotifyApiClient;
+            this.contentDeserializer = contentDeserializer;
         }
 
         public async Task<SearchForTrackResponse> Execute(SearchForTrackRequest request)
         {
-            string requestUrl = $"{MethodName}?type=track&offset={request.Offset}&limit={request.Limit}&market={request.Market}&q={CreateQuery(request)}";
+            string requestUrl = $"search?type=track&offset={request.Offset}&limit={request.Limit}&market={request.Market}&q={CreateQuery(request)}";
             var httpResponse = await spotifyApiClient.CallGetMethod(request, requestUrl);
-            var result = await GetSerializedResponse(httpResponse);
+            var result = await contentDeserializer
+                .DeserializeContent<SearchForTrackResponseWrapper>(httpResponse);
 
             return result?.Response;
         }

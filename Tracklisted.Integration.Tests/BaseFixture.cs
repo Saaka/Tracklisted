@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
+using Tracklisted.Infrastructure.Configuration;
 
 namespace Tracklisted.Integration.Tests
 {
@@ -15,6 +16,7 @@ namespace Tracklisted.Integration.Tests
 
             var serviceBuilder = new ServiceCollection();
             RegisterDependencies(serviceBuilder)
+                .RegisterHttpClientHelpers()
                 .AddLogging(log =>
                 {
                     log.AddConsole();

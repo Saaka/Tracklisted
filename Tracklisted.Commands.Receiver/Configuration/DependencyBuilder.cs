@@ -4,6 +4,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using Tracklisted.Commands.Receiver.Queue;
 using Tracklisted.Configuration;
+using Tracklisted.Infrastructure.Configuration;
 using Tracklisted.Integration.Lastfm.Configuration;
 using Tracklisted.Integration.Spotify.Configuration;
 
@@ -21,6 +22,7 @@ namespace Tracklisted.Commands.Receiver.Configuration
                 .AddSingleton(configuration)
                 .AddSingleton<IQueueClientFactory, QueueClientFactory>()
                 .AddTransient<IQueueMessageReceiver, QueueMessageReceiver>()
+                .RegisterHttpClientHelpers()
                 .RegisterLastfmModule(configuration)
                 .RegisterSpotifyModule()
                 .RegisterCommandHandlers()
