@@ -26,12 +26,16 @@ namespace Tracklisted.Integration.Tests.Spotify
 
             var request = new Integration.Spotify.GetSeveralTracks.Models.GetSeveralTracksRequest
             {
-
+                TrackIds = new List<string>
+                {
+                    "31vNk90n3dOaZZnPgu9IIa"
+                }
             };
 
             var result = await action.Execute(request);
 
             Assert.NotNull(result);
+            Assert.Equal(request.TrackIds.Count, result.Tracks.Count);
         }
     }
 }

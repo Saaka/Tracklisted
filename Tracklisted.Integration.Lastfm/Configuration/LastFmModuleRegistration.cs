@@ -11,7 +11,7 @@ namespace Tracklisted.Integration.Lastfm.Configuration
         public static IServiceCollection RegisterLastfmModule(this IServiceCollection services, IConfiguration configuration)
         {
             services
-                .RegisterHttpClient<ILastfmApiClient, LastfmApiClient>();
+                .RegisterHttpClient<LastfmApiClient>();
 
             services
                 .AddSingleton<ILastfmConfiguration, LastfmConfiguration>()
