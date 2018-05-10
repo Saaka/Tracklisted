@@ -50,7 +50,9 @@ namespace Tracklisted.Integration.Tests.Spotify
             var request = new SearchForTrackRequest
             {
                 Market = "pl",
-                TrackName = "Enter Sandman"
+                TrackName = "Enter Sandman",
+                ArtistName = "Apocalyptica",
+                Limit = 1
             };
 
             var result = await action.Execute(request);

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 using System.Threading.Tasks;
 using Tracklisted.Infrastructure.HttpClient;
 using Tracklisted.Integration.Spotify.SearchForTrack.Models;
@@ -33,7 +34,7 @@ namespace Tracklisted.Integration.Spotify.SearchForTrack
 
         private string CreateQuery(SearchForTrackRequest request)
         {
-            return Uri.EscapeDataString(request.TrackName);
+            return WebUtility.UrlEncode($"artist:{request.ArtistName} track:{request.TrackName}");
         }
     }
 }
