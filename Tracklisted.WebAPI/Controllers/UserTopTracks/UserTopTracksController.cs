@@ -4,6 +4,7 @@ using System;
 using System.Threading.Tasks;
 using Tracklisted.Commands.GetUserTopTracksList;
 using Tracklisted.Commands.Sender;
+using Tracklisted.WebAPI.ViewModel.UserTopTracks;
 
 namespace Tracklisted.WebAPI.Controllers.UserTopTracks
 {
@@ -22,14 +23,14 @@ namespace Tracklisted.WebAPI.Controllers.UserTopTracks
         }
 
         [HttpPost("create")]
-        public async Task<IActionResult> Create(string user)
+        public async Task<IActionResult> Create([FromBody]CreateUserTopTracksList request)
         {
             string messageId = Guid.NewGuid().ToString();
 
             _logger.LogInformation($"Created command with id {messageId}");
 
             await _senderClient
-                .Send(new CreateUserTopTracksListCommand { CommandId = messageId, LastfmUserName = user});
+                .Send(new CreateUserTopTracksListCommand { CommandId = messageId, LastfmUserName = request.UserName, Period = request.Period });
 
             return new JsonResult(messageId);
         }

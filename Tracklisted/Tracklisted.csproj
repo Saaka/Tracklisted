@@ -11,6 +11,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Tracklisted.Commands\Tracklisted.Commands.csproj" />
+    <ProjectReference Include="..\Tracklisted.Integration.Lastfm\Tracklisted.Integration.Lastfm.csproj" />
+    <ProjectReference Include="..\Tracklisted.Integration.Spotify\Tracklisted.Integration.Spotify.csproj" />
   </ItemGroup>
 
 </Project>
