@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using System;
-using Tracklisted.Commands.GetArtistTopTracks;
+using Tracklisted.CommandHandlers.CreateUserTopTracksList;
+using Tracklisted.CommandHandlers.Infrastructure;
 
 namespace Tracklisted.Commands.Receiver.CommandHandlers.Infrastructure
 {
@@ -26,6 +27,8 @@ namespace Tracklisted.Commands.Receiver.CommandHandlers.Infrastructure
                     return _serviceProvider.GetRequiredService<GetArtistTopTracksCommandHandler>();
                 case CommandType.GetUserTopTracks:
                     return _serviceProvider.GetRequiredService<GetUserTopTracksCommandHandler>();
+                case CommandType.CreateUserTopTracksList:
+                    return _serviceProvider.GetRequiredService<CreateUserTopTracksListCommandHandler>();
                 default:
                     throw new ArgumentException("Invalid command type");
             }

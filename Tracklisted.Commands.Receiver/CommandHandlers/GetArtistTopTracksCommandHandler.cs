@@ -1,8 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
-using System;
 using System.Threading.Tasks;
+using Tracklisted.CommandHandlers.Infrastructure;
 using Tracklisted.Commands.GetArtistTopTracks;
-using Tracklisted.Commands.Receiver.CommandHandlers.Infrastructure;
 
 namespace Tracklisted.Commands.Receiver.CommandHandlers
 {

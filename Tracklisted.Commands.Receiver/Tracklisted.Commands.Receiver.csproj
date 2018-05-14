@@ -18,6 +18,7 @@
     <ProjectReference Include="..\Tracklisted.Configuration\Tracklisted.Configuration.csproj" />
     <ProjectReference Include="..\Tracklisted.Integration.Lastfm\Tracklisted.Integration.Lastfm.csproj" />
     <ProjectReference Include="..\Tracklisted.Integration.Spotify\Tracklisted.Integration.Spotify.csproj" />
+    <ProjectReference Include="..\Tracklisted\Tracklisted.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Extensions.Configuration.Abstractions">

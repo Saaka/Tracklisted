@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
+using Tracklisted.Commands;
 
-namespace Tracklisted.Commands.Receiver.CommandHandlers.Infrastructure
+namespace Tracklisted.CommandHandlers.Infrastructure
 {
     public abstract class BaseCommandHandler<T> : ICommandHandler
         where T : BaseCommand

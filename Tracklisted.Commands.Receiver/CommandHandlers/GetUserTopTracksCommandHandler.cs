@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using System.Linq;
 using System.Threading.Tasks;
+using Tracklisted.CommandHandlers.Infrastructure;
 using Tracklisted.Commands.GetArtistTopTracks;
 using Tracklisted.Commands.Receiver.CommandHandlers.Infrastructure;
 using Tracklisted.Integration.Lastfm.GetUserTopTracks;

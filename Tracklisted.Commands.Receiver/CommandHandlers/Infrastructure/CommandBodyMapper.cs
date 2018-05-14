@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using Tracklisted.Commands.GetArtistTopTracks;
+using Tracklisted.Commands.GetUserTopTracksList;
 
 namespace Tracklisted.Commands.Receiver.CommandHandlers.Infrastructure
 {
@@ -25,6 +26,8 @@ namespace Tracklisted.Commands.Receiver.CommandHandlers.Infrastructure
                     return JsonConvert.DeserializeObject<GetArtistTopTracksCommand>(commandBody);
                 case CommandType.GetUserTopTracks:
                     return JsonConvert.DeserializeObject<GetUserTopTracksCommand>(commandBody);
+                case CommandType.CreateUserTopTracksList:
+                    return JsonConvert.DeserializeObject<CreateUserTopTracksListCommand>(commandBody);
                 default:
                     throw new ArgumentException("Invalid command type");
             }

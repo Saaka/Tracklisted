@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Tracklisted.CommandHandlers.CreateUserTopTracksList;
 using Tracklisted.Commands.Receiver.CommandHandlers;
 using Tracklisted.Commands.Receiver.CommandHandlers.Infrastructure;
 
@@ -15,7 +16,8 @@ namespace Tracklisted.Commands.Receiver.Configuration
 
             services
                 .AddTransient<GetArtistTopTracksCommandHandler>()
-                .AddTransient<GetUserTopTracksCommandHandler>();                
+                .AddTransient<GetUserTopTracksCommandHandler>()
+                .AddTransient<CreateUserTopTracksListCommandHandler>();                
 
             return services;
         }
