@@ -23,6 +23,7 @@ namespace Tracklisted.Commands.Receiver.Configuration
                 .AddSingleton<IQueueClientFactory, QueueClientFactory>()
                 .AddTransient<IQueueMessageReceiver, QueueMessageReceiver>()
                 .RegisterHttpClientHelpers()
+                .RegisterTracklistedModule()
                 .RegisterLastfmModule(configuration)
                 .RegisterSpotifyModule()
                 .RegisterCommandHandlers()

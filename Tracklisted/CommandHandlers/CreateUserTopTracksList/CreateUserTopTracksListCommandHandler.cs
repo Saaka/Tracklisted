@@ -10,6 +10,7 @@ using Tracklisted.Integration.Lastfm.GetUserTopTracks;
 using Tracklisted.Integration.Lastfm.GetUserTopTracks.Models;
 using Tracklisted.Integration.Spotify.Models;
 using Tracklisted.Integration.Spotify.SearchForTrack;
+using Tracklisted.SongSearch.Spotify;
 
 namespace Tracklisted.CommandHandlers.CreateUserTopTracksList
 {
@@ -17,15 +18,15 @@ namespace Tracklisted.CommandHandlers.CreateUserTopTracksList
     {
         private readonly ILogger<CreateUserTopTracksListCommandHandler> logger;
         private readonly IGetUserTopTracksAction getUserTopTracksAction;
-        private readonly ISearchForTrackAction searchForTrackAction;
+        private readonly ISpotifySongSearchHandler spotifySongSearchHandler;
 
         public CreateUserTopTracksListCommandHandler(ILogger<CreateUserTopTracksListCommandHandler> logger,
             IGetUserTopTracksAction getUserTopTracksAction,
-            ISearchForTrackAction searchForTrackAction)
+            ISpotifySongSearchHandler spotifySongSearchHandler)
         {
             this.logger = logger;
             this.getUserTopTracksAction = getUserTopTracksAction;
-            this.searchForTrackAction = searchForTrackAction;
+            this.spotifySongSearchHandler = spotifySongSearchHandler;
         }
 
         protected override async Task HandleCommand(CreateUserTopTracksListCommand command)
@@ -46,24 +47,14 @@ namespace Tracklisted.CommandHandlers.CreateUserTopTracksList
                 {
                     LastfmTopTrack = topTrack
                 };
-                var searchTrackResult = await GetSpotifyTrack(topTrack);
-                if (searchTrackResult != null && searchTrackResult.Total > 0)
-                    trackData.SpotifyTrack = searchTrackResult.Tracks.First();
+                var searchTrackResult = await spotifySongSearchHandler.SearchForTrack(topTrack.Name, topTrack.Artist.Name, "pl");
+                if (searchTrackResult.Track != null)
+                    trackData.SpotifyTrack = searchTrackResult.Track;
 
                 list.Add(trackData);
             }
 
             return list;
-        }
-
-        private async Task<Integration.Spotify.SearchForTrack.Models.SearchForTrackResponse> GetSpotifyTrack(UserTopTrack topTrack)
-        {
-            return await searchForTrackAction.Execute(new Integration.Spotify.SearchForTrack.Models.SearchForTrackRequest
-            {
-                ArtistName = topTrack.Artist.Name,
-                TrackName = topTrack.Name,
-                Market = "pl"
-            });
         }
 
         private async Task<UserTopTracks> GetTopTrackList(CreateUserTopTracksListCommand command)
