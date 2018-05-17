@@ -11,6 +11,7 @@ namespace Tracklisted.SongSearch.Spotify
         }
         public bool ExactMatch { get; set; }
         public bool TrackAvailable { get; set; }
+        public bool HasAlternativeTracks { get; set; }
         public SpotifyTrack Track { get; set; }
         public List<SpotifyTrack> AlternativeTracks { get; set; }
     }

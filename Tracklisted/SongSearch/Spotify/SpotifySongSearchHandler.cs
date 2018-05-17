@@ -24,30 +24,16 @@ namespace Tracklisted.SongSearch.Spotify
 
         public async Task<SpotifySongSearchResult> SearchForTrack(string trackName, string artistName, string martket)
         {
-            var trackResult = await GetSpotifyTrack(trackName, artistName, martket, TrackLimit);
+            var trackResult = await SearchForTrack(trackName, artistName, martket, TrackLimit);
 
             if (trackResult.Tracks.Any())
             {
-                var track = trackResult.Tracks.First();
-                if (string.Compare(trackName, track.Name, StringComparison.InvariantCultureIgnoreCase) == 0)
+                foreach (var track in trackResult.Tracks)
                 {
-                    return new SpotifySongSearchResult
-                    {
-                        ExactMatch = true,
-                        TrackAvailable = true,
-                        Track = track
-                    };
+                    if (string.Compare(trackName, track.Name, StringComparison.InvariantCultureIgnoreCase) == 0)
+                        return GetSelectedTrackAsResult(trackResult, track);
                 }
-                else
-                {
-                    return new SpotifySongSearchResult
-                    {
-                        AlternativeTracks = trackResult.Tracks.Skip(1).ToList(),
-                        ExactMatch = true,
-                        TrackAvailable = true,
-                        Track = track
-                    };
-                }
+                return GetFirstTrackAsResult(trackResult);
             }
 
             return new SpotifySongSearchResult
@@ -56,7 +42,31 @@ namespace Tracklisted.SongSearch.Spotify
             };
         }
 
-        private async Task<SearchForTrackResponse> GetSpotifyTrack(string trackName, string artistName, string market, int limit)
+        private static SpotifySongSearchResult GetSelectedTrackAsResult(SearchForTrackResponse trackResult, SpotifyTrack track)
+        {
+            return new SpotifySongSearchResult
+            {
+                AlternativeTracks = trackResult.Tracks.Where(x => x != track).ToList(),
+                HasAlternativeTracks = trackResult.Tracks.Count > 1,
+                ExactMatch = true,
+                TrackAvailable = true,
+                Track = track
+            };
+        }
+
+        private static SpotifySongSearchResult GetFirstTrackAsResult(SearchForTrackResponse trackResult)
+        {
+            return new SpotifySongSearchResult
+            {
+                AlternativeTracks = trackResult.Tracks.Skip(1).ToList(),
+                HasAlternativeTracks = trackResult.Tracks.Count > 1,
+                ExactMatch = true,
+                TrackAvailable = true,
+                Track = trackResult.Tracks.First()
+            };
+        }
+
+        private async Task<SearchForTrackResponse> SearchForTrack(string trackName, string artistName, string market, int limit)
         {
             return await searchForTrackAction.Execute(new SearchForTrackRequest
             {
