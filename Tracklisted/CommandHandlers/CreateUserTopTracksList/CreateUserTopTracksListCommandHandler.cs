@@ -31,11 +31,12 @@ namespace Tracklisted.CommandHandlers.CreateUserTopTracksList
 
         protected override async Task HandleCommand(CreateUserTopTracksListCommand command)
         {
-            logger.LogInformation($"Create top tracks list for user {command.LastfmUserName} and period {command.Period.ToString()}");
+            logger.LogInformation($"START - Create top tracks list for user {command.LastfmUserName} and period {command.Period.ToString()}");
 
             var topTrackList = await GetTopTrackList(command);
             var tracksData = await GetTracksData(topTrackList);
 
+            logger.LogInformation($"END - Create top tracks list for user {command.LastfmUserName} and period {command.Period.ToString()}");
         }
 
         private async Task<IEnumerable<TrackData>> GetTracksData(UserTopTracks topTrackList)
@@ -48,7 +49,7 @@ namespace Tracklisted.CommandHandlers.CreateUserTopTracksList
                     LastfmTopTrack = topTrack
                 };
                 var searchTrackResult = await spotifySongSearchHandler.SearchForTrack(topTrack.Name, topTrack.Artist.Name, "pl");
-                if (searchTrackResult.Track != null)
+                if (searchTrackResult.TrackAvailable)
                     trackData.SpotifyTrack = searchTrackResult.Track;
 
                 list.Add(trackData);

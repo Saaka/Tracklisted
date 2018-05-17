@@ -1,5 +1,7 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
+using Tracklisted.Integration.Spotify.Models;
 using Tracklisted.Integration.Spotify.SearchForTrack;
 using Tracklisted.Integration.Spotify.SearchForTrack.Models;
 
@@ -13,6 +15,7 @@ namespace Tracklisted.SongSearch.Spotify
     public class SpotifySongSearchHandler : ISpotifySongSearchHandler
     {
         private readonly ISearchForTrackAction searchForTrackAction;
+        private const int TrackLimit = 4;
 
         public SpotifySongSearchHandler(ISearchForTrackAction searchForTrackAction)
         {
@@ -21,22 +24,46 @@ namespace Tracklisted.SongSearch.Spotify
 
         public async Task<SpotifySongSearchResult> SearchForTrack(string trackName, string artistName, string martket)
         {
-            var trackResult = await GetSpotifyTrack(trackName, artistName, martket);
+            var trackResult = await GetSpotifyTrack(trackName, artistName, martket, TrackLimit);
+
+            if (trackResult.Tracks.Any())
+            {
+                var track = trackResult.Tracks.First();
+                if (string.Compare(trackName, track.Name, StringComparison.InvariantCultureIgnoreCase) == 0)
+                {
+                    return new SpotifySongSearchResult
+                    {
+                        ExactMatch = true,
+                        TrackAvailable = true,
+                        Track = track
+                    };
+                }
+                else
+                {
+                    return new SpotifySongSearchResult
+                    {
+                        AlternativeTracks = trackResult.Tracks.Skip(1).ToList(),
+                        ExactMatch = true,
+                        TrackAvailable = true,
+                        Track = track
+                    };
+                }
+            }
 
             return new SpotifySongSearchResult
             {
-                Track = trackResult.Tracks.FirstOrDefault(),
-                AlternativeTracks = trackResult.Tracks.Skip(1).ToList()
+                TrackAvailable = false
             };
         }
 
-        private async Task<SearchForTrackResponse> GetSpotifyTrack(string trackName, string artistName, string market)
+        private async Task<SearchForTrackResponse> GetSpotifyTrack(string trackName, string artistName, string market, int limit)
         {
             return await searchForTrackAction.Execute(new SearchForTrackRequest
             {
                 ArtistName = artistName,
                 TrackName = trackName,
-                Market = market
+                Market = market,
+                Limit = limit
             });
         }
     }
