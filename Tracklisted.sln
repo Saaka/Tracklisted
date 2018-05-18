@@ -23,7 +23,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tracklisted.Integration.Spo
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{DA8CAFF4-B213-429B-AB0D-4402F559DA61}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tracklisted.Integration.Tests", "Tracklisted.Integration.Tests\Tracklisted.Integration.Tests.csproj", "{14D1F05D-A408-4842-9514-FD618E6890FC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tracklisted.Integration.Tests", "Tracklisted.Integration.Tests\Tracklisted.Integration.Tests.csproj", "{14D1F05D-A408-4842-9514-FD618E6890FC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tracklisted.Model", "Tracklisted.Model\Tracklisted.Model.csproj", "{DE946FCA-BB64-488D-9FB3-E9C1D3F006FB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -71,6 +73,10 @@ Global
 		{14D1F05D-A408-4842-9514-FD618E6890FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{14D1F05D-A408-4842-9514-FD618E6890FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{14D1F05D-A408-4842-9514-FD618E6890FC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DE946FCA-BB64-488D-9FB3-E9C1D3F006FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE946FCA-BB64-488D-9FB3-E9C1D3F006FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE946FCA-BB64-488D-9FB3-E9C1D3F006FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE946FCA-BB64-488D-9FB3-E9C1D3F006FB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
