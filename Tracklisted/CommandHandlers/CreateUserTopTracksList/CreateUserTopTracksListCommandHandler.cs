@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Tracklisted.CommandHandlers.Infrastructure;
 using Tracklisted.Commands.GetUserTopTracksList;
+using Tracklisted.DAL.UserTopTracksStore;
 using Tracklisted.Integration.Lastfm.GetUserTopTracks;
 using Tracklisted.Integration.Lastfm.GetUserTopTracks.Models;
 using Tracklisted.Integration.Spotify.Models;
@@ -19,14 +20,17 @@ namespace Tracklisted.CommandHandlers.CreateUserTopTracksList
         private readonly ILogger<CreateUserTopTracksListCommandHandler> logger;
         private readonly IGetUserTopTracksAction getUserTopTracksAction;
         private readonly ISpotifySongSearchHandler spotifySongSearchHandler;
+        private readonly IUserTopTracksRepository topTracksRepository;
 
         public CreateUserTopTracksListCommandHandler(ILogger<CreateUserTopTracksListCommandHandler> logger,
             IGetUserTopTracksAction getUserTopTracksAction,
-            ISpotifySongSearchHandler spotifySongSearchHandler)
+            ISpotifySongSearchHandler spotifySongSearchHandler,
+            IUserTopTracksRepository topTracksRepository)
         {
             this.logger = logger;
             this.getUserTopTracksAction = getUserTopTracksAction;
             this.spotifySongSearchHandler = spotifySongSearchHandler;
+            this.topTracksRepository = topTracksRepository;
         }
 
         protected override async Task HandleCommand(CreateUserTopTracksListCommand command)

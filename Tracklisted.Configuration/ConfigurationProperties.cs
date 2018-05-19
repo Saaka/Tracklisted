@@ -1,6 +1,6 @@
 ﻿namespace Tracklisted.Configuration
 {
-    internal class ConfigurationProperties
+    public class ConfigurationProperties
     {
         public class Mongo
         {

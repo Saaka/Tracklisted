@@ -4,6 +4,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using Tracklisted.Commands.Receiver.Queue;
 using Tracklisted.Configuration;
+using Tracklisted.DAL.Configuration;
 using Tracklisted.Infrastructure.Configuration;
 using Tracklisted.Integration.Lastfm.Configuration;
 using Tracklisted.Integration.Spotify.Configuration;
@@ -25,6 +26,7 @@ namespace Tracklisted.Commands.Receiver.Configuration
                 .RegisterHttpClientHelpers()
                 .RegisterTracklistedModule()
                 .RegisterLastfmModule(configuration)
+                .RegisterDataModule(configuration)
                 .RegisterSpotifyModule()
                 .RegisterCommandHandlers()
                 .AddLogging(log =>
