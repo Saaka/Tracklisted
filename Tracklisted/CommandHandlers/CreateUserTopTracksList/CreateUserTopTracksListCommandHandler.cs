@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -10,7 +9,6 @@ using Tracklisted.DAL.UserTopTracksStore;
 using Tracklisted.Integration.Lastfm.GetUserTopTracks;
 using Tracklisted.Integration.Lastfm.GetUserTopTracks.Models;
 using Tracklisted.Integration.Spotify.Models;
-using Tracklisted.Integration.Spotify.SearchForTrack;
 using Tracklisted.SongSearch.Spotify;
 
 namespace Tracklisted.CommandHandlers.CreateUserTopTracksList
@@ -40,7 +38,32 @@ namespace Tracklisted.CommandHandlers.CreateUserTopTracksList
             var topTrackList = await GetTopTrackList(command);
             var tracksData = await GetTracksData(topTrackList);
 
+            await topTracksRepository.Add(CreateModel(command, tracksData));
+
             logger.LogInformation($"END - Create top tracks list for user {command.LastfmUserName} and period {command.Period.ToString()}");
+        }
+
+        private Tracklisted.Model.UserTopTracks.UserTopTracks CreateModel(CreateUserTopTracksListCommand command, IEnumerable<TrackData> tracksData)
+        {
+            return new Model.UserTopTracks.UserTopTracks
+            {
+                Id = new Guid(command.CommandId),
+                CommandType = command.CommandType.ToString(),
+                Period = command.Period.ToString(),
+                User = command.LastfmUserName,
+                Tracks = tracksData.Select(x => new Tracklisted.Model.UserTopTracks.TrackData
+                {
+                    AlbumName = x.SpotifyTrack?.Album.Name,
+                    SpotifyAlbumUrl = x.SpotifyTrack?.Album.ExternalUrls.SpotifyUrl,
+                    ArtistName = x.LastfmTopTrack.Artist.Name,
+                    LastfmUrl = x.LastfmTopTrack.LastfmUrl,
+                    Rank = x.LastfmTopTrack.Rank,
+                    TrackName = x.LastfmTopTrack.Name,
+                    SpotifyPreview = x.SpotifyTrack?.PreviewUrl,
+                    SpotifyUrl = x.SpotifyTrack?.ExternalUrls.SpotifyUrl,
+                    Url = x.LastfmTopTrack.Images.FirstOrDefault()?.Url
+                }).ToList()
+            };
         }
 
         private async Task<IEnumerable<TrackData>> GetTracksData(UserTopTracks topTrackList)

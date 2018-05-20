@@ -17,4 +17,8 @@
     <ProjectReference Include="..\Tracklisted.Model\Tracklisted.Model.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Mappings\" />
+  </ItemGroup>
+
 </Project>
