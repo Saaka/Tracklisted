@@ -13,6 +13,7 @@ namespace Tracklisted.Model.UserTopTracks
         public string CommandType { get; set; }
         public string User { get; set; }
         public string Period { get; set; }
+        public long Timestamp { get; set; }
         public List<TopTrackData> Tracks { get; set; }
     }
 }

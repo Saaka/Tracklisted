@@ -53,6 +53,7 @@ namespace Tracklisted.CommandHandlers.CreateUserTopTracksList
                 CommandType = command.CommandType.ToString(),
                 Period = command.Period.ToString(),
                 User = command.LastfmUserName,
+                Timestamp = DateTimeOffset.Now.ToUnixTimeSeconds(),
                 Tracks = tracksData.Select(x => new TopTrackData
                 {
                     TrackName = x.LastfmTopTrack.Name,
