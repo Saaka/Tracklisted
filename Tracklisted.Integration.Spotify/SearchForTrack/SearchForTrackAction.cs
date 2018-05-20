@@ -26,9 +26,10 @@ namespace Tracklisted.Integration.Spotify.SearchForTrack
         {
             string requestUrl = $"search?type=track&offset={request.Offset}&limit={request.Limit}&market={request.Market}&q={CreateQuery(request)}";
             var httpResponse = await spotifyApiClient.CallGetMethod(request, requestUrl);
+
             var result = await contentDeserializer
                 .DeserializeContent<SearchForTrackResponseWrapper>(httpResponse);
-
+            
             return result?.Response;
         }
 

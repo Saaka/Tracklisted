@@ -16,8 +16,8 @@ namespace Tracklisted.Integration.Spotify.Configuration
                 .AddSingleton<ISpotifyConfiguration, SpotifyConfiguration>()
                 .AddTransient<ISpotifyClientTokenProvider, SpotifyClientTokenProvider>()
                 
-                .AddTransient<IGetSeveralTracksAction, GetSeveralTracksAction>()
-                .AddTransient<ISearchForTrackAction, SearchForTrackAction>();
+                .AddSingleton<IGetSeveralTracksAction, GetSeveralTracksAction>()
+                .AddSingleton<ISearchForTrackAction, SearchForTrackAction>();
 
             return services;
         }

@@ -8,6 +8,7 @@ using Tracklisted.Commands.GetUserTopTracksList;
 using Tracklisted.DAL.UserTopTracksStore;
 using Tracklisted.Integration.Lastfm.GetUserTopTracks;
 using Tracklisted.Integration.Lastfm.GetUserTopTracks.Models;
+using Tracklisted.Integration.Lastfm.Models;
 using Tracklisted.Integration.Spotify.Models;
 using Tracklisted.Model.UserTopTracks;
 using Tracklisted.SongSearch.Spotify;
@@ -62,8 +63,21 @@ namespace Tracklisted.CommandHandlers.CreateUserTopTracksList
                     SpotifyUrl = x.SpotifyTrack?.ExternalUrls.SpotifyUrl,
                     SpotifyPreview = x.SpotifyTrack?.PreviewUrl,
                     SpotifyAlbumUrl = x.SpotifyTrack?.Album.ExternalUrls.SpotifyUrl,
-                    Url = x.LastfmTopTrack.Images.FirstOrDefault()?.Url
+                    Images = CreateImages(x.LastfmTopTrack.Images, x.SpotifyTrack?.Album.Images)
                 }).ToList()
+            };
+        }
+
+        private TopTrackImages CreateImages(List<ImageInfo> lastfmImages, List<SpotifyImage> spotifyAlbumImages)
+        {
+            if (lastfmImages == null || !lastfmImages.Any())
+                return new TopTrackImages();
+
+            return new TopTrackImages
+            {
+                LastfmImageUrlSmall = lastfmImages.FirstOrDefault(x=> x.ImageSize == ImageSize.Small)?.Url,
+                LastfmImageUrlMedium = lastfmImages.FirstOrDefault(x=> x.ImageSize == ImageSize.Medium)?.Url,
+                LastfmImageUrlLarge = lastfmImages.FirstOrDefault(x=> x.ImageSize == ImageSize.Large)?.Url
             };
         }
 

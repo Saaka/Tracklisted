@@ -10,6 +10,6 @@
         public string SpotifyUrl { get; set; }
         public string SpotifyAlbumUrl { get; set; }
         public string LastfmUrl { get; set; }
-        public string Url { get; set; }
+        public TopTrackImages Images { get; set; }
     }
 }

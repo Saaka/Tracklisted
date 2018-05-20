@@ -26,7 +26,7 @@ namespace Tracklisted.SongSearch.Spotify
         {
             var trackResult = await SearchForTrack(trackName, artistName, martket, TrackLimit);
 
-            if (trackResult.Tracks.Any())
+            if (trackResult != null && trackResult.Tracks.Any())
             {
                 foreach (var track in trackResult.Tracks)
                 {

@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Net;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Tracklisted.Integration.Spotify.Base;
 using Tracklisted.Integration.Spotify.Configuration;
@@ -22,6 +24,7 @@ namespace Tracklisted.Integration.Spotify
         private readonly string baseUrl;
 
         private const string ClientAuthScheme = "Bearer";
+        private const int DefaultRetryDelayInSeconds = 3;
 
         public SpotifyApiClient(HttpClient client,
             ISpotifyConfiguration spotifyConfig,
@@ -41,7 +44,22 @@ namespace Tracklisted.Integration.Spotify
         {
             var httpRequest = await CreateGetRequest(requestUrl, useClientAuthorization);
 
-            return await client.SendAsync(httpRequest);
+            var response = await client.SendAsync(httpRequest);
+
+            if (response.StatusCode == HttpStatusCode.TooManyRequests)
+            {
+                await Task.Delay(GetDelay(response.Headers.RetryAfter));
+                return await CallGetMethod(request, requestUrl, useClientAuthorization, useUserAuthorization);
+            }
+            return response;
+        }
+
+        private TimeSpan GetDelay(RetryConditionHeaderValue retryAfter)
+        {
+            if (retryAfter.Delta.HasValue)
+                return retryAfter.Delta.Value.Add(TimeSpan.FromSeconds(1));
+
+            return TimeSpan.FromSeconds(DefaultRetryDelayInSeconds);
         }
 
         private async Task<HttpRequestMessage> CreateGetRequest(string requestUrl,
