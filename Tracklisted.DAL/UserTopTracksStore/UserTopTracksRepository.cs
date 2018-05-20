@@ -29,7 +29,7 @@ namespace Tracklisted.DAL.UserTopTracksStore
         public async Task<UserTopTracks> GetTopTracksById(string id)
         {
             return await context.TopTracksCollection
-                .Find(x => x.Id.ToString() == id)
+                .Find(x => x.CommandId.ToString() == id)
                 .FirstOrDefaultAsync();
         }
     }

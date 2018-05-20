@@ -3,11 +3,11 @@ using System.Collections.Generic;
 
 namespace Tracklisted.Integration.Lastfm.GetUserTopTracks.Models
 {
-    public class UserTopTracks
+    public class LastfmUserTopTracks
     {
         [JsonProperty("@attr")]
-        public UserTopTracksMetadata Metadata { get; set; }
+        public LastfmUserTopTracksMetadata Metadata { get; set; }
         [JsonProperty("track")]
-        public List<UserTopTrack> Tracks { get; set; }
+        public List<LastfmUserTopTrack> Tracks { get; set; }
     }
 }

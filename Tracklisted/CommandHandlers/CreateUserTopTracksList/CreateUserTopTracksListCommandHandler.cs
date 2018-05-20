@@ -9,6 +9,7 @@ using Tracklisted.DAL.UserTopTracksStore;
 using Tracklisted.Integration.Lastfm.GetUserTopTracks;
 using Tracklisted.Integration.Lastfm.GetUserTopTracks.Models;
 using Tracklisted.Integration.Spotify.Models;
+using Tracklisted.Model.UserTopTracks;
 using Tracklisted.SongSearch.Spotify;
 
 namespace Tracklisted.CommandHandlers.CreateUserTopTracksList
@@ -43,30 +44,30 @@ namespace Tracklisted.CommandHandlers.CreateUserTopTracksList
             logger.LogInformation($"END - Create top tracks list for user {command.LastfmUserName} and period {command.Period.ToString()}");
         }
 
-        private Tracklisted.Model.UserTopTracks.UserTopTracks CreateModel(CreateUserTopTracksListCommand command, IEnumerable<TrackData> tracksData)
+        private UserTopTracks CreateModel(CreateUserTopTracksListCommand command, IEnumerable<TrackData> tracksData)
         {
-            return new Model.UserTopTracks.UserTopTracks
+            return new UserTopTracks
             {
-                Id = new Guid(command.CommandId),
+                CommandId = new Guid(command.CommandId),
                 CommandType = command.CommandType.ToString(),
                 Period = command.Period.ToString(),
                 User = command.LastfmUserName,
-                Tracks = tracksData.Select(x => new Tracklisted.Model.UserTopTracks.TrackData
+                Tracks = tracksData.Select(x => new TopTrackData
                 {
-                    AlbumName = x.SpotifyTrack?.Album.Name,
-                    SpotifyAlbumUrl = x.SpotifyTrack?.Album.ExternalUrls.SpotifyUrl,
-                    ArtistName = x.LastfmTopTrack.Artist.Name,
-                    LastfmUrl = x.LastfmTopTrack.LastfmUrl,
-                    Rank = x.LastfmTopTrack.Rank,
                     TrackName = x.LastfmTopTrack.Name,
-                    SpotifyPreview = x.SpotifyTrack?.PreviewUrl,
+                    ArtistName = x.LastfmTopTrack.Artist.Name,
+                    AlbumName = x.SpotifyTrack?.Album.Name,
+                    Rank = x.LastfmTopTrack.Rank,
+                    LastfmUrl = x.LastfmTopTrack.LastfmUrl,
                     SpotifyUrl = x.SpotifyTrack?.ExternalUrls.SpotifyUrl,
+                    SpotifyPreview = x.SpotifyTrack?.PreviewUrl,
+                    SpotifyAlbumUrl = x.SpotifyTrack?.Album.ExternalUrls.SpotifyUrl,
                     Url = x.LastfmTopTrack.Images.FirstOrDefault()?.Url
                 }).ToList()
             };
         }
 
-        private async Task<IEnumerable<TrackData>> GetTracksData(UserTopTracks topTrackList)
+        private async Task<IEnumerable<TrackData>> GetTracksData(LastfmUserTopTracks topTrackList)
         {
             var list = new List<TrackData>();
             foreach (var topTrack in topTrackList.Tracks)
@@ -85,7 +86,7 @@ namespace Tracklisted.CommandHandlers.CreateUserTopTracksList
             return list;
         }
 
-        private async Task<UserTopTracks> GetTopTrackList(CreateUserTopTracksListCommand command)
+        private async Task<LastfmUserTopTracks> GetTopTrackList(CreateUserTopTracksListCommand command)
         {
             var tracksResponse = await getUserTopTracksAction.Execute(new GetUserTopTracksRequest
             {
@@ -98,7 +99,7 @@ namespace Tracklisted.CommandHandlers.CreateUserTopTracksList
 
         private class TrackData
         {
-            public UserTopTrack LastfmTopTrack { get; set; }
+            public LastfmUserTopTrack LastfmTopTrack { get; set; }
             public SpotifyTrack SpotifyTrack { get; set; }
         }
     }

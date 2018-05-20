@@ -2,7 +2,7 @@
 
 namespace Tracklisted.Integration.Lastfm.GetUserTopTracks.Models
 {
-    public class UserTopTracksMetadata
+    public class LastfmUserTopTracksMetadata
     {
         [JsonProperty("user")]
         public string User { get; set; }

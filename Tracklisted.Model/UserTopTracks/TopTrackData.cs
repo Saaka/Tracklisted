@@ -1,6 +1,6 @@
 ﻿namespace Tracklisted.Model.UserTopTracks
 {
-    public class TrackData
+    public class TopTrackData
     {
         public string ArtistName { get; set; }
         public string TrackName { get; set; }

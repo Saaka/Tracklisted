@@ -5,7 +5,7 @@ using Tracklisted.Integration.Lastfm.Models;
 
 namespace Tracklisted.Integration.Lastfm.GetUserTopTracks.Models
 {
-    public class UserTopTrack : IHasImage
+    public class LastfmUserTopTrack : IHasImage
     {
         [JsonProperty("name")]
         public string Name { get; set; }

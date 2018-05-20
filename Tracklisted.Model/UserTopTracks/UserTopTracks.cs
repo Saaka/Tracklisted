@@ -9,10 +9,10 @@ namespace Tracklisted.Model.UserTopTracks
     {
         [BsonId]
         public ObjectId ObjectId { get; set; }
-        public Guid Id { get; set; }
+        public Guid CommandId { get; set; }
         public string CommandType { get; set; }
         public string User { get; set; }
         public string Period { get; set; }
-        public List<TrackData> Tracks { get; set; }
+        public List<TopTrackData> Tracks { get; set; }
     }
 }
