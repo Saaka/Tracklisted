@@ -20,6 +20,7 @@
     <ProjectReference Include="..\Tracklisted.Commands\Tracklisted.Commands.csproj" />
     <ProjectReference Include="..\Tracklisted.Configuration\Tracklisted.Configuration.csproj" />
     <ProjectReference Include="..\Tracklisted.Commands.Sender\Tracklisted.Commands.Sender.csproj" />
+    <ProjectReference Include="..\Tracklisted\Tracklisted.csproj" />
   </ItemGroup>
 
 </Project>

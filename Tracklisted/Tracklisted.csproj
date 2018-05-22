@@ -15,10 +15,7 @@
     <ProjectReference Include="..\Tracklisted.Integration.Lastfm\Tracklisted.Integration.Lastfm.csproj" />
     <ProjectReference Include="..\Tracklisted.Integration.Spotify\Tracklisted.Integration.Spotify.csproj" />
     <ProjectReference Include="..\Tracklisted.Model\Tracklisted.Model.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Mappings\" />
+    <ProjectReference Include="..\Tracklisted.ViewModel\Tracklisted.ViewModel.csproj" />
   </ItemGroup>
 
 </Project>

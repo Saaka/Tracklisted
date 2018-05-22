@@ -27,7 +27,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tracklisted.Integration.Tes
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tracklisted.Model", "Tracklisted.Model\Tracklisted.Model.csproj", "{DE946FCA-BB64-488D-9FB3-E9C1D3F006FB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tracklisted.DAL", "Tracklisted.DAL\Tracklisted.DAL.csproj", "{87D3F076-188E-42D6-A4DB-3C9956718E6F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tracklisted.DAL", "Tracklisted.DAL\Tracklisted.DAL.csproj", "{87D3F076-188E-42D6-A4DB-3C9956718E6F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tracklisted.ViewModel", "Tracklisted.ViewModel\Tracklisted.ViewModel.csproj", "{6A561107-0D96-4737-926A-404476D54594}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -83,6 +85,10 @@ Global
 		{87D3F076-188E-42D6-A4DB-3C9956718E6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{87D3F076-188E-42D6-A4DB-3C9956718E6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{87D3F076-188E-42D6-A4DB-3C9956718E6F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A561107-0D96-4737-926A-404476D54594}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A561107-0D96-4737-926A-404476D54594}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A561107-0D96-4737-926A-404476D54594}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A561107-0D96-4737-926A-404476D54594}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

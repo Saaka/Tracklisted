@@ -1,4 +1,5 @@
 ﻿using MongoDB.Driver;
+using System;
 using System.Threading.Tasks;
 using Tracklisted.Model.UserTopTracks;
 
@@ -7,7 +8,7 @@ namespace Tracklisted.DAL.UserTopTracksStore
     public interface IUserTopTracksRepository
     {
         Task<UserTopTracks> Add(UserTopTracks model);
-        Task<UserTopTracks> GetTopTracksById(string id);
+        Task<UserTopTracks> GetTopTracksByCommandId(string commandId);
     }
     public class UserTopTracksRepository : IUserTopTracksRepository
     {
@@ -26,10 +27,11 @@ namespace Tracklisted.DAL.UserTopTracksStore
             return model;
         }
 
-        public async Task<UserTopTracks> GetTopTracksById(string id)
+        public async Task<UserTopTracks> GetTopTracksByCommandId(string commandId)
         {
+            var commandGuid = new Guid(commandId);
             return await context.TopTracksCollection
-                .Find(x => x.CommandId.ToString() == id)
+                .Find(x => x.CommandId == commandGuid)
                 .FirstOrDefaultAsync();
         }
     }

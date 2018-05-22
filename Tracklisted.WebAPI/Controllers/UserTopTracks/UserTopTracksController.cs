@@ -4,6 +4,7 @@ using System;
 using System.Threading.Tasks;
 using Tracklisted.Commands.GetUserTopTracksList;
 using Tracklisted.Commands.Sender;
+using Tracklisted.Queries.GetUserTopTracksList;
 using Tracklisted.WebAPI.ViewModel.UserTopTracks;
 
 namespace Tracklisted.WebAPI.Controllers.UserTopTracks
@@ -13,26 +14,39 @@ namespace Tracklisted.WebAPI.Controllers.UserTopTracks
     public class UserTopTracksController : ControllerBase
     {
         private readonly IMessageSenderClient _senderClient;
+        private readonly IGetUserTopTracksListQuery _userTopTracksListQuery;
         private readonly ILogger<UserTopTracksController> _logger;
 
         public UserTopTracksController(IMessageSenderClient senderClient,
+            IGetUserTopTracksListQuery userTopTracksListQuery,
             ILogger<UserTopTracksController> logger)
         {
             _senderClient = senderClient;
+            _userTopTracksListQuery = userTopTracksListQuery;
             _logger = logger;
         }
 
         [HttpPost("create")]
         public async Task<IActionResult> Create([FromBody]CreateUserTopTracksList request)
         {
-            string messageId = Guid.NewGuid().ToString();
+            string commandId = Guid.NewGuid().ToString();
 
-            _logger.LogInformation($"Created command with id {messageId}");
+            _logger.LogInformation($"*** CreateUserTopTracksList *** CommandId: {commandId}");
 
             await _senderClient
-                .Send(new CreateUserTopTracksListCommand { CommandId = messageId, LastfmUserName = request.UserName, Period = request.Period });
+                .Send(new CreateUserTopTracksListCommand { CommandId = commandId, LastfmUserName = request.UserName, Period = request.Period });
 
-            return new JsonResult(messageId);
+            return new JsonResult(commandId);
+        }
+
+        [HttpGet("{commandId}")]
+        public async Task<IActionResult> Get(string commandId)
+        {
+            _logger.LogInformation($"*** GetUserTopTracksList *** CommandId: {commandId}");
+
+            var result = await _userTopTracksListQuery.Get(commandId);
+
+            return new JsonResult(result);
         }
     }
 }

@@ -2,6 +2,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using Tracklisted.Configuration;
 using Tracklisted.Commands.Sender.Config;
+using Tracklisted.DAL.Configuration;
 
 namespace Tracklisted.WebAPI.Config
 {
@@ -11,6 +12,8 @@ namespace Tracklisted.WebAPI.Config
         {
             services
                 .RegisterConfiguration()
+                .RegisterDataModule(configuration)
+                .RegisterTracklistedQueryModule()
                 .RegisterCommandsSender();
 
             return services;
