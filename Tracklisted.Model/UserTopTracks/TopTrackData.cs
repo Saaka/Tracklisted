@@ -8,6 +8,7 @@
         public int Rank { get; set; }
         public string SpotifyPreview { get; set; }
         public string SpotifyUrl { get; set; }
+        public string SpotifyUri { get; set; }
         public string SpotifyAlbumUrl { get; set; }
         public string LastfmUrl { get; set; }
         public TopTrackImages Images { get; set; }

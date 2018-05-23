@@ -11,5 +11,6 @@
         public string SpotifyUrl { get; set; }
         public string SpotifyAlbumUrl { get; set; }
         public string LastfmUrl { get; set; }
+        public string SpotifyUri { get; set; }
     }
 }

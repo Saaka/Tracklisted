@@ -62,6 +62,7 @@ namespace Tracklisted.CommandHandlers.CreateUserTopTracksList
                     Rank = x.LastfmTopTrack.Rank,
                     LastfmUrl = x.LastfmTopTrack.LastfmUrl,
                     SpotifyUrl = x.SpotifyTrack?.ExternalUrls.SpotifyUrl,
+                    SpotifyUri = x.SpotifyTrack.SpotifyUri,
                     SpotifyPreview = x.SpotifyTrack?.PreviewUrl,
                     SpotifyAlbumUrl = x.SpotifyTrack?.Album.ExternalUrls.SpotifyUrl,
                     Images = CreateImages(x.LastfmTopTrack.Images, x.SpotifyTrack?.Album.Images)

@@ -51,6 +51,7 @@ namespace Tracklisted.Queries.GetUserTopTracksList
                 MediumImageUrl = track.Images.LastfmImageUrlMedium,
                 PreviewUrl = track.SpotifyPreview,
                 SpotifyUrl = track.SpotifyUrl,
+                SpotifyUri = track.SpotifyUri,
                 LastfmUrl = track.LastfmUrl,
                 SpotifyAlbumUrl = track.SpotifyAlbumUrl
             };
