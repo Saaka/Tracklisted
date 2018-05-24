@@ -40,7 +40,8 @@ namespace Tracklisted.CommandHandlers.CreateUserTopTracksList
             var topTrackList = await GetTopTrackList(command);
             var tracksData = await GetTracksData(topTrackList);
 
-            await topTracksRepository.Add(CreateModel(command, tracksData));
+            var model = CreateModel(command, tracksData);
+            await topTracksRepository.Add(model);
 
             logger.LogInformation($"END - Create top tracks list for user {command.LastfmUserName} and period {command.Period.ToString()}");
         }
@@ -62,7 +63,7 @@ namespace Tracklisted.CommandHandlers.CreateUserTopTracksList
                     Rank = x.LastfmTopTrack.Rank,
                     LastfmUrl = x.LastfmTopTrack.LastfmUrl,
                     SpotifyUrl = x.SpotifyTrack?.ExternalUrls.SpotifyUrl,
-                    SpotifyUri = x.SpotifyTrack.SpotifyUri,
+                    SpotifyUri = x.SpotifyTrack?.SpotifyUri,
                     SpotifyPreview = x.SpotifyTrack?.PreviewUrl,
                     SpotifyAlbumUrl = x.SpotifyTrack?.Album.ExternalUrls.SpotifyUrl,
                     Images = CreateImages(x.LastfmTopTrack.Images, x.SpotifyTrack?.Album.Images)

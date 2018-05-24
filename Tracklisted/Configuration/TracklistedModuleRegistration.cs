@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Tracklisted.CommandHandlers.CreateUserTopTracksList;
 using Tracklisted.Queries.GetUserTopTracksList;
 using Tracklisted.SongSearch.Spotify;
 
@@ -14,10 +15,12 @@ namespace Tracklisted.Configuration
             return services;
         }
 
-        public static IServiceCollection RegisterTracklistedModule(this IServiceCollection services)
+        public static IServiceCollection RegisterTracklistedCommandHandlersModule(this IServiceCollection services)
         {
             services
-                .AddTransient<ISpotifySongSearchHandler, SpotifySongSearchHandler>();
+                .AddTransient<ISpotifySongSearchHandler, SpotifySongSearchHandler>()
+
+                .AddTransient<CreateUserTopTracksListCommandHandler>();
 
             return services;
         }

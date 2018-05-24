@@ -16,8 +16,7 @@ namespace Tracklisted.Commands.Receiver.Configuration
 
             services
                 .AddTransient<GetArtistTopTracksCommandHandler>()
-                .AddTransient<GetUserTopTracksCommandHandler>()
-                .AddTransient<CreateUserTopTracksListCommandHandler>();                
+                .AddTransient<GetUserTopTracksCommandHandler>();                
 
             return services;
         }

@@ -9,7 +9,7 @@ namespace Tracklisted.Configuration
         /// </summary>
         /// <param name="services"></param>
         /// <returns></returns>
-        public static IServiceCollection RegisterConfiguration(this IServiceCollection services)
+        public static IServiceCollection RegisterConfigurationModule(this IServiceCollection services)
         {
             services.AddSingleton<IServiceBusConfiguration, ApplicationConfiguration>();
             services.AddSingleton<IMongoConfiguration, ApplicationConfiguration>();

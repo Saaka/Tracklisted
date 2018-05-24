@@ -29,7 +29,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tracklisted.Model", "Trackl
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tracklisted.DAL", "Tracklisted.DAL\Tracklisted.DAL.csproj", "{87D3F076-188E-42D6-A4DB-3C9956718E6F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tracklisted.ViewModel", "Tracklisted.ViewModel\Tracklisted.ViewModel.csproj", "{6A561107-0D96-4737-926A-404476D54594}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tracklisted.ViewModel", "Tracklisted.ViewModel\Tracklisted.ViewModel.csproj", "{6A561107-0D96-4737-926A-404476D54594}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tracklisted.Tests", "Tracklisted.CommandHandlers.Tests\Tracklisted.Tests.csproj", "{90F19BA3-EDCE-4A75-BCEC-05CB5285CFE4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -89,12 +91,17 @@ Global
 		{6A561107-0D96-4737-926A-404476D54594}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6A561107-0D96-4737-926A-404476D54594}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6A561107-0D96-4737-926A-404476D54594}.Release|Any CPU.Build.0 = Release|Any CPU
+		{90F19BA3-EDCE-4A75-BCEC-05CB5285CFE4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90F19BA3-EDCE-4A75-BCEC-05CB5285CFE4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90F19BA3-EDCE-4A75-BCEC-05CB5285CFE4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90F19BA3-EDCE-4A75-BCEC-05CB5285CFE4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{14D1F05D-A408-4842-9514-FD618E6890FC} = {DA8CAFF4-B213-429B-AB0D-4402F559DA61}
+		{90F19BA3-EDCE-4A75-BCEC-05CB5285CFE4} = {DA8CAFF4-B213-429B-AB0D-4402F559DA61}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A7802B65-535F-43FF-8656-A51E358941AD}

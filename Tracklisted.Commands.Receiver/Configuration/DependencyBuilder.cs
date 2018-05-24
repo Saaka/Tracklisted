@@ -24,17 +24,17 @@ namespace Tracklisted.Commands.Receiver.Configuration
                 .AddSingleton<IQueueClientFactory, QueueClientFactory>()
                 .AddTransient<IQueueMessageReceiver, QueueMessageReceiver>()
                 .RegisterHttpClientHelpers()
-                .RegisterTracklistedModule()
                 .RegisterLastfmModule(configuration)
                 .RegisterDataModule(configuration)
                 .RegisterSpotifyModule()
                 .RegisterCommandHandlers()
+                .RegisterTracklistedCommandHandlersModule()
                 .AddLogging(log =>
                 {
                     log.AddConsole();
                 })
                 .AddMemoryCache()
-                .RegisterConfiguration();
+                .RegisterConfigurationModule();
 
             return services.
                 BuildServiceProvider();

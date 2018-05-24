@@ -11,7 +11,7 @@ namespace Tracklisted.WebAPI.Config
         public static IServiceCollection RegisterModules(this IServiceCollection services, IConfiguration configuration)
         {
             services
-                .RegisterConfiguration()
+                .RegisterConfigurationModule()
                 .RegisterDataModule(configuration)
                 .RegisterTracklistedQueryModule()
                 .RegisterCommandsSender();
